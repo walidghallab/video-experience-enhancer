@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Coursera video experience enhancer",
+  "version": "1.0",
+  "description": "This Chrome extension enhances experience with videos on Coursera.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/coursera-16.png",
+      "48": "images/coursera-48.png",
+      "128": "images/coursera-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/coursera-16.png",
+    "48": "images/coursera-48.png",
+    "128": "images/coursera-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.coursera.org/*"],
+      "js": ["coursera.js"]
+    }
+  ]
+}

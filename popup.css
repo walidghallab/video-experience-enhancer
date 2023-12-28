@@ -1,0 +1,31 @@
+h1 {
+    color: blue;
+    font-size: 16px;
+}
+
+dl {
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: max-content auto;
+  
+}
+
+body {
+    font-size: 14px;
+    width: 220px;
+}
+
+dt {
+    font-weight: bold;
+    grid-column-start: 1;
+}
+
+dd {
+    grid-column-start: 2;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.center-text {
+    text-align: center;
+}
