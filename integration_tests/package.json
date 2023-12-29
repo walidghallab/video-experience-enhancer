@@ -1,0 +1,21 @@
+{
+  "name": "video-experience-enhancer",
+  "version": "1.0.0",
+  "description": "Chrome extension that provides additional functionality for video players played in the web",
+  "scripts": {
+    "test": "jest ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walidghallab/video-experience-enhancer.git"
+  },
+  "author": "Walid Ghallab <wa.ghallab@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/walidghallab/video-experience-enhancer/issues"
+  },
+  "homepage": "https://github.com/walidghallab/video-experience-enhancer#readme",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "puppeteer": "^21.6.1"
+  }
+}

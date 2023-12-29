@@ -14,7 +14,7 @@ git clone https://github.com/walidghallab/video-experience-enhancer
 
 2. Open the Chrome browser and go to `chrome://extensions`.
 3. Enable the "Developer mode" toggle switch.
-4. Click on the "Load unpacked" button and select the cloned repository folder.
+4. Click on the "Load unpacked" button and select `src` directory from the cloned repository folder.
 5. The extension will be installed and ready to use.
 
 ## Usage
