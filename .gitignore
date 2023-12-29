@@ -1,0 +1,27 @@
+# Ignore all .DS_Store files
+.DS_Store
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore package-lock.json to avoid conflicts
+package-lock.json
+
+# VSCode project files
+**/.vscode
+*.code-workspace
+
+# Emacs save files
+*~
+\#*\#
+.\#*
+
+# Vim-related files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Ignore .env files as they usually contain sensitive information
+.env
