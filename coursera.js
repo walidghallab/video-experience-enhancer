@@ -1,6 +1,11 @@
-document.querySelectorAll("body")[0].addEventListener("keydown", (e) => {
+// We are adding event listener to the body element as the video element is keep getting out of focus in full screen mode
+document.querySelector("body").addEventListener("keydown", (e) => {
+  // We don't do anything if we are not in fullscreen as it is already working correctly.
   if (document.fullscreenElement) {
-    video = document.querySelectorAll("video")[0];
+    video = document.querySelector("video");
+    if (!video) {
+      return;
+    }
     const inc = 5;
     switch (e.key) {
       case "ArrowRight":
@@ -9,7 +14,7 @@ document.querySelectorAll("body")[0].addEventListener("keydown", (e) => {
       case "ArrowLeft":
         video.currentTime -= inc;
         break;
-      case " ":
+      case " ": // Space
         if (video.paused) {
           video.play();
         } else {
@@ -17,10 +22,10 @@ document.querySelectorAll("body")[0].addEventListener("keydown", (e) => {
         }
         break;
       case "f":
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-          e.preventDefault();
-        } 
+      case "F":
+        // We are already in full screen mode, so exit it.
+        document.exitFullscreen();
+        e.preventDefault();
         break;
     }
   }
