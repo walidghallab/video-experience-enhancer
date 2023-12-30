@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Chrome extension that provides additional functionality for video players played in the web",
   "scripts": {
-    "test": "mocha index.test.js"
+    "test": "mocha integration.test.js"
   },
   "type": "module",
   "repository": {
