@@ -38,7 +38,7 @@ suite(
       const headerText = await driver.findElement(By.tagName("h1")).getText();
       console.log(headerText);
       expect(headerText).to.equal(
-        "Welcome to Coursera video experience enhancer"
+        "Welcome to video experience enhancer"
       );
     });
 
