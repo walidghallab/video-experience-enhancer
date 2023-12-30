@@ -20,6 +20,7 @@ document.querySelector("body").addEventListener("keydown", (e) => {
         } else {
           video.pause();
         }
+        e.preventDefault();
         break;
       case "f":
       case "F":

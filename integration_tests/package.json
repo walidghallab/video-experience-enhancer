@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Chrome extension that provides additional functionality for video players played in the web",
   "scripts": {
-    "test": "jest ."
+    "test": "mocha index.test.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/walidghallab/video-experience-enhancer.git"
@@ -15,7 +16,8 @@
   },
   "homepage": "https://github.com/walidghallab/video-experience-enhancer#readme",
   "dependencies": {
-    "jest": "^29.7.0",
-    "puppeteer": "^21.6.1"
+    "chai": "^5.0.0",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.16.0"
   }
 }
