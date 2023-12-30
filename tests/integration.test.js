@@ -109,7 +109,7 @@ suite(
       await sleep(0.1 * SECOND);
       newCurrentTime = Number(await video.getAttribute("currentTime"));
       expect(newCurrentTime).to.be.greaterThan(currentTime);
-    }).timeout(10 * SECOND);
+    });
 
     afterEach(async function () {
       await driver.quit();
