@@ -4,9 +4,6 @@
 # Ignore node_modules directory
 node_modules/
 
-# Ignore package-lock.json to avoid conflicts
-package-lock.json
-
 # VSCode project files
 **/.vscode
 *.code-workspace
