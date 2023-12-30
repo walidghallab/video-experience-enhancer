@@ -32,6 +32,8 @@ Current supported web pages are:
 
 - [coursera.org](https://www.coursera.org/)
 
+For adding more functionality or websites, please check [feature requests](#feature-requests).
+
 ## Contributing
 
 Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
