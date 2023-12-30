@@ -1,4 +1,4 @@
-# Chrome Extension Project
+# Video experience enhancer (Chrome Extension)
 
 This project is a Chrome extension that provides additional functionality for video players played in the web.
 
