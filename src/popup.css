@@ -29,9 +29,14 @@ dd {
   text-align: center;
 }
 
-p.colorful,
-p.colorful a {
-  background-image: linear-gradient(to right, #ee4b2b, #449a3c);
+@keyframes animated-gradient{
+  to{
+    background-position: 200%;
+  }
+}
+
+.colorful {
+  background-image: linear-gradient(to right, #ff2a00, #449a3c);
 
   color: transparent;
   background-clip: text;
@@ -40,14 +45,8 @@ p.colorful a {
   background-position: -200%;
   animation: animated-gradient 6s infinite alternate-reverse;
 }
-
-
-
-@keyframes animated-gradient{
-  to{
-    background-position: 200%;
-  }
-}
-p.colorful a {
+.colorful a {
   font-weight: bold;
+  color: inherit;
+  text-decoration: underline;
 }
