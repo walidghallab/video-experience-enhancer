@@ -44,13 +44,16 @@ function getInnerHtmlForSupportedDomain() {
 
 function getDomForFilingRequest() {
   return `
-    <p class="colorful"> 
-        Please file a feature request on
+  <p>
+    <span class="colorful"> 
+      If you have any new functionality that you want to see on this website or any others,
+      <em>please submit a feature request on
         <a 
             href="https://github.com/walidghallab/video-experience-enhancer?tab=readme-ov-file#feature-requests" 
             alt="Link to file a feature request."
             target="_blank"
-        >our GitHub page</a> if you have any new functionality that you want to see on this website or any others.
-    </p>
+        >our GitHub page</a></em> 
+    </span>
+  </p>
     `;
 }

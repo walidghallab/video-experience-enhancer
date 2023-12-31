@@ -32,7 +32,7 @@ Current supported web pages are:
 
 - [coursera.org](https://www.coursera.org/)
 
-For adding more functionality or websites, please check [feature requests](#feature-requests).
+For adding more functionality or websites, please submit [feature requests](#feature-requests).
 
 ## Contributing
 
