@@ -1,9 +1,6 @@
 import { Options } from "selenium-webdriver/chrome.js";
-import { suite } from "selenium-webdriver/testing/index.js";
 import { Builder } from "selenium-webdriver/index.js";
-import { Browser, By, Key } from "selenium-webdriver";
-// import { Builder } from "selenium-webdriver/chromium.js";
-// import {ServiceBuilder} from "selenium-webdriver/chrome.js";
+import { By, Key } from "selenium-webdriver";
 import { expect } from "chai";
 import * as fs from "fs";
 
@@ -75,25 +72,21 @@ describe("Video experience enhancer", function () {
 
     console.log("Testing that the video is playing.");
     const video = await driver.findElement(By.css("video"));
-    let currentTime = Number(await video.getAttribute("currentTime"));
-    await sleep(0.1 * SECOND);
-    let newCurrentTime = Number(await video.getAttribute("currentTime"));
-    expect(newCurrentTime).to.be.greaterThan(currentTime);
+    expect(await video.getProperty("paused")).to.equal(false);
 
     console.log("Pausing the video.");
     await driver.actions().sendKeys(" ").perform();
 
     console.log("Testing that the video is paused.");
-    currentTime = Number(await video.getAttribute("currentTime"));
-    await sleep(0.1 * SECOND);
-    newCurrentTime = Number(await video.getAttribute("currentTime"));
-    expect(currentTime).to.equal(newCurrentTime);
-
+    expect(await video.getProperty("paused")).to.equal(true);
+    
+    let currentTime = Number(await video.getAttribute("currentTime"));
+    
     console.log("Seeking forward.");
     await driver.actions().sendKeys(Key.ARROW_RIGHT).perform();
-
+    
     console.log("Testing that the video is seeked forward.");
-    newCurrentTime = Number(await video.getAttribute("currentTime"));
+    let newCurrentTime = Number(await video.getAttribute("currentTime"));
     expect(newCurrentTime).to.be.closeTo(currentTime + 5, 5);
     currentTime = newCurrentTime;
 
@@ -109,10 +102,7 @@ describe("Video experience enhancer", function () {
     await driver.actions().sendKeys(" ").perform();
 
     console.log("Testing that the video is playing.");
-    currentTime = Number(await video.getAttribute("currentTime"));
-    await sleep(0.1 * SECOND);
-    newCurrentTime = Number(await video.getAttribute("currentTime"));
-    expect(newCurrentTime).to.be.greaterThan(currentTime);
+    expect(await video.getProperty("paused")).to.equal(false);
   });
 
   afterEach(async function () {
