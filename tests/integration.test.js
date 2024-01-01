@@ -5,7 +5,7 @@ import { expect } from "chai";
 import * as fs from "fs";
 
 const EXTENSION_PATH = "../src";
-const EXTENSION_ID = "adhkkhmmefalfngnpjnghgppibdkomdd";
+const EXTENSION_ID = "gpgijjcmnjpbdpaijihbchgdeencehng";
 const SECOND = 1000;
 const RUN_IN_HEADLESS_MODE = true;
 
