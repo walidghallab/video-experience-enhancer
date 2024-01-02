@@ -19,7 +19,7 @@ function isSupportedDomain(url) {
 
 function getInnerHtmlForNotSupportedDomain() {
   return `
-    The extension is not enabled on this website as no issues were reported on it.
+    Functionality on this website already works out of the box.
     ` + getDomForFilingRequest();
 }
 
