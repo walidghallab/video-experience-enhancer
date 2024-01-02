@@ -4,7 +4,13 @@ This project is a Chrome extension that provides additional functionality for vi
 
 ## Installation
 
-To install the extension, follow these steps:
+### From Chrome web store (recommended)
+
+You can install the latest published release from the [Chrome web store](https://chromewebstore.google.com/detail/video-experience-enhancer/gpgijjcmnjpbdpaijihbchgdeencehng?hl=en)
+
+### From source code (for development)
+
+To install the extension from the source code, follow these steps:
 
 1. Clone the repository using the command:
 
@@ -16,6 +22,8 @@ git clone https://github.com/walidghallab/video-experience-enhancer
 3. Enable the "Developer mode" toggle switch.
 4. Click on the "Load unpacked" button and select `src` directory from the cloned repository folder.
 5. The extension will be installed and ready to use.
+
+Note that if you install it this way, it will get automatically removed every time you relaunch chrome. This way of installation is listed only for development purposes.
 
 ## Usage
 
