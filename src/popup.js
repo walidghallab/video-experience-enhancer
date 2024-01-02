@@ -38,6 +38,9 @@ function getInnerHtmlForSupportedDomain() {
     
         <dt>F or f</dt>
         <dd>Enter/Exit Fullscreen</dd>
+    
+        <dt>C or c</dt>
+        <dd>Show/Hide English subtitles</dd>
     </dl>
     ` + getDomForFilingRequest();
 }
