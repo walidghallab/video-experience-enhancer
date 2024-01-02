@@ -103,6 +103,16 @@ describe("Video experience enhancer", function () {
 
     console.log("Testing that the video is playing.");
     expect(await video.getProperty("paused")).to.equal(false);
+
+    console.log("Pressing 'c' to show the English subtitles.");
+    await video.click(); // Focus the element.
+    await driver.actions().sendKeys("c").perform();
+
+    console.log("Testing that the English subtitles are shown.");
+    const englishTrack = await video.getProperty("textTracks").then((tracks) =>
+      tracks.find((track) => track.language === "en")
+    );
+    expect(await englishTrack.mode).to.equal("showing");
   });
 
   afterEach(async function () {
