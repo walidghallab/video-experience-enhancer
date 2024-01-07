@@ -9,10 +9,10 @@ node_modules/
 .pnp.js
 
 # testing
-/coverage
+**/coverage
 
-# production
-/build
+# production (Commented out since this directory existence is critical for the extension to work).
+# **/build
 
 # VSCode project files
 **/.vscode
