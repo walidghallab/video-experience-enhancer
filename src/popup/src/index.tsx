@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ChromeContextProvider  from './ChromeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const mockValue = {
+  url: "https://coursera.org/",
+};
 root.render(
   <React.StrictMode>
-    <App />
+    <ChromeContextProvider mockValue={mockValue}>
+      <App />
+    </ChromeContextProvider>
   </React.StrictMode>
 );
 
