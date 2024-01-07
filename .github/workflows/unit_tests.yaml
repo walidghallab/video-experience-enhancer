@@ -25,6 +25,6 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
       - run: npm ci
-        working-directory: ./src/popup
+        working-directory: ./popup
       - run: npm test
-        working-directory: ./src/popup
+        working-directory: ./popup

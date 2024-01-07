@@ -37,7 +37,7 @@ describe("Video experience enhancer", function () {
   });
 
   it("popup renders correctly", async function () {
-    await driver.get(`chrome-extension://${EXTENSION_ID}/popup/build/index.html`);
+    await driver.get(`chrome-extension://${EXTENSION_ID}/popup/index.html`);
     const headerText = await driver.findElement(By.css("h1")).getText();
     console.log(headerText);
     expect(headerText).to.equal("Welcome to video experience enhancer");

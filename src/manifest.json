@@ -7,7 +7,7 @@
   "homepage_url": "https://github.com/walidghallab/video-experience-enhancer",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhU5xW4sWOANU5vCcNiTSaUIOkzQWJW4WSp1C0AH22oh9l9VRUZO03ohEE8tcKiXZ/V0Jf7japwERSvr/oOkeKdpjwA9Kq/HHLA5eVcboaJBAwp29Wn1DWIapyWhIX9/EEaIv/fp7pUJvO0Kdjgy9+/gSAozBgKSScVnQJDiDk57UstoE+jQP1++QYm5QqYH9r0mcfnQ7degOhqIDP06PZtjXBpbR9sBDbVOuGWoNwrG2OwiLdqduKz90VYrOZJiArrt3yrUQt3Za+LTkdwlfhI5SQtpfcZ711VapTLJWrJFQEXp62+BIi76CGrrit4rnOUgbekHjJBwONou1w4cVEQIDAQAB",
   "action": {
-    "default_popup": "popup/build/index.html",
+    "default_popup": "popup/index.html",
     "default_icon": {
       "16": "images/icon.png",
       "48": "images/icon.png",

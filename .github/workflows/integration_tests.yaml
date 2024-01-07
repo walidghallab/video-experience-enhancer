@@ -27,6 +27,6 @@ jobs:
       - run: npm ci
         working-directory: ./tests
       - run: npm run build
-        working-directory: ./src/popup
+        working-directory: ./popup
       - run: npm test
         working-directory: ./tests
