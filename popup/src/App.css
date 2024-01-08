@@ -56,3 +56,12 @@ dd {
   text-decoration: underline;
 }
 
+.error {
+  background-color: #ff2a00;
+  color: white;
+}
+
+.success {
+  background-color: #449a3c;
+  color: white;
+}

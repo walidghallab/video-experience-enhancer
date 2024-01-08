@@ -1,5 +1,25 @@
 // We are adding event listener to the body element as the video element is keep getting out of focus in full screen mode
-document.querySelector("body").addEventListener("keydown", (e) => {
+
+chrome.storage.sync.get(["disabled"], function ({disabled}) {
+  if (!disabled) {
+    document.querySelector("body").addEventListener("keydown", handleKeyDown);
+  }
+  chrome.storage.onChanged.addListener(function (changes, namespace) {
+    if (changes.disabled) {
+      if (changes.disabled.newValue) {
+        document
+          .querySelector("body")
+          .removeEventListener("keydown", handleKeyDown);
+      } else {
+        document
+          .querySelector("body")
+          .addEventListener("keydown", handleKeyDown);
+      }
+    }
+  });
+});
+
+function handleKeyDown(e) {
   const video = document.querySelector("video");
   if (!video) {
     return;
@@ -62,4 +82,4 @@ document.querySelector("body").addEventListener("keydown", (e) => {
         break;
     }
   }
-});
+}
