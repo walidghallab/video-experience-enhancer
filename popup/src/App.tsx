@@ -1,6 +1,7 @@
 import "./App.css";
 import Loader from "./Loader";
 import { useChromeContext } from "./ChromeContext";
+import DisableApplication from "./DisableApplication";
 
 const supportedUrlsRegex = ["https://(.*.)?coursera.org/.*"].map(
   (url) => new RegExp(url)
@@ -93,6 +94,7 @@ function App() {
         <HeaderTitle />
       </header>
       <main>{componentToRender}</main>
+      {url && <DisableApplication />}
     </div>
   );
 }

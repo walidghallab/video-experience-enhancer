@@ -9,11 +9,18 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+let disabled = false;
+
 const mockValue = {
   url: "https://coursera.org/",
+  disabled,
+  setDisabled: (newDisabled: boolean) => {
+    disabled = newDisabled;
+  },
 };
 root.render(
   <React.StrictMode>
+    {/* The mockValue gets removed automatically by the build script to use the real values for the extension. */}
     <ChromeContextProvider mockValue={mockValue}>
       <App />
     </ChromeContextProvider>

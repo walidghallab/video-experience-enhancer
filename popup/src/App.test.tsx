@@ -1,9 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import ChromeContextProvider from "./ChromeContext";
+import ChromeContextProvider, { ChromeContextProps } from "./ChromeContext";
 
-const SUPPORTED_WEBSITE = { url: "https://coursera.org/" };
-const UNSUPPORTED_WEBSITE = { url: "https://example.org/" };
+function newMockForUrl(url: string): ChromeContextProps {
+  let disabled = false;
+  return {
+    url,
+    disabled,
+    setDisabled: (newDisabled: boolean) => {
+      disabled = newDisabled;
+    },
+  };
+}
+
+const SUPPORTED_WEBSITE = newMockForUrl("https://coursera.org/");
+const UNSUPPORTED_WEBSITE = newMockForUrl("https://example.org/");
 
 describe.each([
   ["supported websites", SUPPORTED_WEBSITE],
