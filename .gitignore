@@ -5,14 +5,14 @@
 node_modules/
 
 # Dependencies
-/.pnp
-.pnp.js
+**/.pnp
+**/.pnp.js
 
 # testing
 **/coverage
 
-# production (Commented out since this directory existence is critical for the extension to work).
-# **/build
+# production
+/src/popup
 
 # VSCode project files
 **/.vscode
