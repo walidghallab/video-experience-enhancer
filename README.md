@@ -12,12 +12,16 @@ You can install the latest published release from the [Chrome web store](https:/
 
 To install the extension from the source code, follow these steps:
 
-1. Clone the repository using the command:
+1. Run this command to clone the repository and build the necessary files.
 
 ```bash
-git clone https://github.com/walidghallab/video-experience-enhancer
+npm -v > /dev/null &&
+git clone https://github.com/walidghallab/video-experience-enhancer && 
+cd video-experience-enhancer/popup &&
+npm install &&
+npm run build &&
+cd ..
 ```
-
 2. Open the Chrome browser and go to `chrome://extensions`.
 3. Enable the "Developer mode" toggle switch.
 4. Click on the "Load unpacked" button and select `src` directory from the cloned repository folder.
