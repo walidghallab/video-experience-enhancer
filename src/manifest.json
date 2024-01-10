@@ -23,6 +23,10 @@
     {
       "matches": ["https://*.coursera.org/*"],
       "js": ["coursera.js"]
+    },
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["all-websites.js"]
     }
   ]
 }
