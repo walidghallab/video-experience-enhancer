@@ -2,7 +2,6 @@
   text-align: center;
 }
 
-
 h1 {
   color: blue;
   font-size: 16px;
@@ -36,12 +35,12 @@ dd {
 }
 
 .margin-around-medium {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-@keyframes animated-gradient{
-  to{
+@keyframes animated-gradient {
+  to {
     background-position: 200%;
   }
 }
@@ -69,5 +68,28 @@ dd {
 
 .success {
   background-color: #449a3c;
+  color: white;
+}
+
+table.popup {
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  border-collapse: collapse;
+}
+
+.popup tr:nth-child(odd) {
+  background-color: rgb(238, 254, 255);
+}
+
+.popup tr:nth-child(even) {
+  background-color: rgb(212, 247, 255);
+}
+
+.popup tr {
+  height: 2em;
+}
+
+.popup tr:hover {
+  background-color: blue;
   color: white;
 }

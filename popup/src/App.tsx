@@ -38,28 +38,38 @@ function SupportedUrl() {
   return (
     <div>
       We currently support those keys:
-      <dl>
-        <dt>Space</dt>
-        <dd>Play/Pause</dd>
-
-        <dt>Left</dt>
-        <dd>Backward 5 seconds</dd>
-
-        <dt>Right</dt>
-        <dd>Forward 5 seconds</dd>
-
-        <dt>F or f</dt>
-        <dd>Enter/Exit Fullscreen</dd>
-
-        <dt>C or c</dt>
-        <dd>Show/Hide English subtitles</dd>
-
-        <dt>Ctrl + Up</dt>
-        <dd>Increase playback rate by 0.5</dd>
-
-        <dt>Ctrl + Down</dt>
-        <dd>Decrease playback rate by 0.5</dd>
-      </dl>
+      <table className="popup">
+        <tbody>
+          <tr>
+            <td>Space</td>
+            <td>Play/Pause</td>
+          </tr>
+          <tr>
+            <td>Left</td>
+            <td>Backward 5 seconds</td>
+          </tr>
+          <tr>
+            <td>Right</td>
+            <td>Forward 5 seconds</td>
+          </tr>
+          <tr>
+            <td>F or f</td>
+            <td>Enter/Exit Fullscreen</td>
+          </tr>
+          <tr>
+            <td>C or c</td>
+            <td>Show/Hide English subtitles</td>
+          </tr>
+          <tr>
+            <td>Ctrl + Up</td>
+            <td>Increase playback rate by 0.5</td>
+          </tr>
+          <tr>
+            <td>Ctrl + Down</td>
+            <td>Decrease playback rate by 0.5</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -68,16 +78,21 @@ function SupportedUrl() {
 function CommonUrl() {
   return (
     <div>
-      <p className="margin-around-medium`">
-        We currently support those keys for this url (if you focus on a video):
-      </p>
-      <dl>
-        <dt>Ctrl + Up</dt>
-        <dd>Increase playback rate by 0.5</dd>
-
-        <dt>Ctrl + Down</dt>
-        <dd>Decrease playback rate by 0.5</dd>
-      </dl>
+      <div className="margin-around-medium">
+        We currently support those keyboard shortcuts for this url<br/>(if you focus on a video):
+      </div>
+      <table className="popup">
+        <tbody>
+          <tr>
+            <td>Ctrl + Up</td>
+            <td>Increase playback rate by 0.5</td>
+          </tr>
+          <tr>
+            <td>Ctrl + Down</td>
+            <td>Decrease playback rate by 0.5</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
