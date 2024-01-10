@@ -14,11 +14,11 @@ function HeaderTitle() {
 function FilingRequest() {
   return (
     <p>
-      <span className="colorful">
+      <span className="colorful margin-around-medium">
         If you have any new functionality that you want to see on this website
         or any others,
         <em>
-          please submit a feature request on
+          please submit a feature request on&nbsp;
           <a
             href="https://github.com/walidghallab/video-experience-enhancer?tab=readme-ov-file#feature-requests"
             aria-label="Link to file a feature request."
@@ -33,42 +33,57 @@ function FilingRequest() {
   );
 }
 
-/** SupportedWebsite gets displayed when the current url is a website with support for special functionality. */
-function SupportedWebsite() {
+/** SupportedUrl gets displayed when the current url is a website with support for special functionality. */
+function SupportedUrl() {
   return (
-    <>
-      <div>
-        We currently support those keys:
-        <dl>
-          <dt>Space</dt>
-          <dd>Play/Pause</dd>
+    <div>
+      We currently support those keys:
+      <dl>
+        <dt>Space</dt>
+        <dd>Play/Pause</dd>
 
-          <dt>Left</dt>
-          <dd>Backward 5 seconds</dd>
+        <dt>Left</dt>
+        <dd>Backward 5 seconds</dd>
 
-          <dt>Right</dt>
-          <dd>Forward 5 seconds</dd>
+        <dt>Right</dt>
+        <dd>Forward 5 seconds</dd>
 
-          <dt>F or f</dt>
-          <dd>Enter/Exit Fullscreen</dd>
+        <dt>F or f</dt>
+        <dd>Enter/Exit Fullscreen</dd>
 
-          <dt>C or c</dt>
-          <dd>Show/Hide English subtitles</dd>
-        </dl>
-      </div>
-      <FilingRequest />
-    </>
+        <dt>C or c</dt>
+        <dd>Show/Hide English subtitles</dd>
+
+        <dt>Ctrl + Up</dt>
+        <dd>Increase playback rate by 0.5</dd>
+
+        <dt>Ctrl + Down</dt>
+        <dd>Decrease playback rate by 0.5</dd>
+      </dl>
+    </div>
   );
 }
 
-/** UnsupportedWebsite gets displayed when the current url is a website with no supported functionality. */
-function UnsupportedWebsite() {
+/** CommonUrl gets displayed when the current url is a website with no special added functionality. */
+function CommonUrl() {
   return (
-    <>
-      <p>Functionality on this website already works out of the box.</p>
-      <FilingRequest />
-    </>
+    <div>
+      <p className="margin-around-medium`">
+        We currently support those keys for this url (if you focus on a video):
+      </p>
+      <dl>
+        <dt>Ctrl + Up</dt>
+        <dd>Increase playback rate by 0.5</dd>
+
+        <dt>Ctrl + Down</dt>
+        <dd>Decrease playback rate by 0.5</dd>
+      </dl>
+    </div>
   );
+}
+
+function UnsupportedUrl() {
+  return <p>Nothing to do on the current url &#128513;</p>;
 }
 
 function isSupportedDomain(url: string) {
@@ -81,10 +96,12 @@ function App() {
   let componentToRender = <Loader />;
 
   if (url) {
-    if (isSupportedDomain(url)) {
-      componentToRender = <SupportedWebsite />;
+    if (!url.startsWith("http")) {
+      componentToRender = <UnsupportedUrl />;
+    } else if (isSupportedDomain(url)) {
+      componentToRender = <SupportedUrl />;
     } else {
-      componentToRender = <UnsupportedWebsite />;
+      componentToRender = <CommonUrl />;
     }
   }
 
@@ -93,8 +110,11 @@ function App() {
       <header>
         <HeaderTitle />
       </header>
-      <main>{componentToRender}</main>
-      {url && <DisableApplication />}
+      <main>
+        {componentToRender}
+        <FilingRequest />
+      </main>
+      <footer>{url && <DisableApplication />}</footer>
     </div>
   );
 }
