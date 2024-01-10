@@ -16,12 +16,13 @@ To install the extension from the source code, follow these steps:
 
 ```bash
 npm -v > /dev/null &&
-git clone https://github.com/walidghallab/video-experience-enhancer && 
+git clone https://github.com/walidghallab/video-experience-enhancer &&
 cd video-experience-enhancer/popup &&
 npm install &&
 npm run build &&
 cd ..
 ```
+
 2. Open the Chrome browser and go to `chrome://extensions`.
 3. Enable the "Developer mode" toggle switch.
 4. Click on the "Load unpacked" button and select `src` directory from the cloned repository folder.
@@ -38,11 +39,23 @@ Once the extension is installed, you can use it by following these steps:
 3. Click on the extension icon in the toolbar to check the supported functionality.
 4. Try any of the functionality provided.
 
-## Supported websites
+## Supported functionality
 
-Current supported web pages are:
+**Keyboard shortcuts:**
 
-- [coursera.org](https://www.coursera.org/)
+| Keyboard shortcut | Functionality                       | Websites              | Notes                                                                                      |
+| ----------------- | ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------ |
+| Ctrl + Arrow Up   | Increase video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video)       |
+| Ctrl + Arrow Down | Decrease video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
+| C or c            | Show/Hide English subtitles         | coursera.org          | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
+| Space             | Play/Pause video                    | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Arrow Left        | Seek video backward 5 seconds       | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Arrow Right       | Seek video forward 5 seconds        | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| F or f            | Exit full-screen mode               | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+
+**Extra functionality:**
+
+- A button inside the popup to enable/disable the extension globally *instantly* without need to refresh any pages.
 
 For adding more functionality or websites, please submit [feature requests](#feature-requests).
 
