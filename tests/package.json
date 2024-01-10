@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "Chrome extension that provides additional functionality for video players played in the web",
   "scripts": {
-    "test": "mocha --timeout 20000 integration.test.js"
+    "test": "mocha --timeout 30000 integration.test.js"
   },
   "type": "module",
   "license": "Apache-2.0",

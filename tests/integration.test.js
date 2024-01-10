@@ -43,7 +43,7 @@ describe("Video experience enhancer", function () {
     expect(headerText).to.equal("Welcome to video experience enhancer");
   });
 
-  it("video controls works correctly on coursera", async function () {
+  it("video controls works correctly on Coursera", async function () {
     console.log("Opening Coursera page with a video.");
     await driver.get(
       `https://www.coursera.org/lecture/generative-ai-for-everyone/welcome-chD5R`
@@ -79,12 +79,12 @@ describe("Video experience enhancer", function () {
 
     console.log("Testing that the video is paused.");
     expect(await video.getProperty("paused")).to.equal(true);
-    
+
     let currentTime = Number(await video.getAttribute("currentTime"));
-    
+
     console.log("Seeking forward.");
     await driver.actions().sendKeys(Key.ARROW_RIGHT).perform();
-    
+
     console.log("Testing that the video is seeked forward.");
     let newCurrentTime = Number(await video.getAttribute("currentTime"));
     expect(newCurrentTime).to.be.closeTo(currentTime + 5, 5);
@@ -109,10 +109,109 @@ describe("Video experience enhancer", function () {
     await driver.actions().sendKeys("c").perform();
 
     console.log("Testing that the English subtitles are shown.");
-    const englishTrack = await video.getProperty("textTracks").then((tracks) =>
-      tracks.find((track) => track.language === "en")
-    );
+    const englishTrack = await video
+      .getProperty("textTracks")
+      .then((tracks) => tracks.find((track) => track.language === "en"));
     expect(await englishTrack.mode).to.equal("showing");
+
+    console.log("Increasing playback rate (3 times).");
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+
+    console.log("Testing playback increased by 1.5.");
+    expect(await video.getProperty("playbackRate")).to.equal(2.5);
+
+    console.log("Decreasing playback rate (2 times).");
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_DOWN)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_DOWN)
+      .keyUp(Key.CONTROL)
+      .perform();
+
+    console.log("Testing playback decreased by 1.");
+    expect(await video.getProperty("playbackRate")).to.equal(1.5);
+  });
+
+  it("video controls works correctly on Youtube", async function () {
+    console.log("Opening Youtube page with a video.");
+    await driver.get(`https://www.youtube.com/watch?v=byauTRO4t30`);
+
+    try {
+      console.log("Accepting cookies.");
+      // Waiting for the cookies bar to load.
+      await sleep(1 * SECOND);
+      await driver.findElement(By.css("button[aria-label*='Accept']")).click();
+    } catch (e) {
+      console.log(
+        `Cookies were not accepted, error (${e}), resuming the test.`
+      );
+    }
+
+    await sleep(1 * SECOND);
+    const video = await driver.findElement(By.css("video"));
+
+    console.log("Increasing playback rate (3 times).");
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_UP)
+      .keyUp(Key.CONTROL)
+      .perform();
+
+    console.log("Testing playback increased by 1.5.");
+    expect(await video.getProperty("playbackRate")).to.equal(2.5);
+
+    console.log("Decreasing playback rate (2 times).");
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_DOWN)
+      .keyUp(Key.CONTROL)
+      .perform();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys(Key.ARROW_DOWN)
+      .keyUp(Key.CONTROL)
+      .perform();
+
+    console.log("Testing playback decreased by 1.");
+    expect(await video.getProperty("playbackRate")).to.equal(1.5);
   });
 
   afterEach(async function () {
