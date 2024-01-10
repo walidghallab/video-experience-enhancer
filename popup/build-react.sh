@@ -1,18 +1,22 @@
 #!/bin/bash
 
 SOURCE_FILE="src/index.tsx"
-BACKUP_FILE="src/index.tsx.bak"
 
-cp $SOURCE_FILE $BACKUP_FILE
+SOURCE_FILE_CONTENT=$(cat $SOURCE_FILE)
+
+trap handle_interrupt_signal INT
+
+function handle_interrupt_signal() {
+        echo "$SOURCE_FILE_CONTENT" > $SOURCE_FILE
+        exit 1
+}
+
 sed -i 's/ mockValue={mockValue}//' $SOURCE_FILE
 
 export BUILD_PATH="../src/popup"
 react-scripts build
 
-cp $BACKUP_FILE $SOURCE_FILE
-rm $BACKUP_FILE
-
-
+echo "$SOURCE_FILE_CONTENT" > $SOURCE_FILE
 
 sed -i 's/src="\//src="/g' $BUILD_PATH/index.html
 sed -i 's/href="\//href="/g' $BUILD_PATH/index.html
