@@ -37,7 +37,9 @@
             e.preventDefault();
             break;
           case "ArrowDown":
-            video.playbackRate -= 0.5;
+            if (video.playbackRate > 0.5) {
+              video.playbackRate -= 0.5;
+            }
             e.preventDefault();
             break;
         }
