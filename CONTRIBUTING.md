@@ -10,7 +10,10 @@ To get started with contributing, please follow these steps:
 2. Clone the forked repository to your local machine.
 3. Install the chrome extension with your local copy (instructions [here](#installation-from-source-code-for-development)).
 4. Make your changes or additions to the codebase.
-5. Build your changes using `npm  run build` from `/popup` directory to update the extension final code (in some cases you might need to click refresh from `chrome://extensions`). To make development easier, there is also a mock with `npm start`, check [/popup/README.md](/popup/README.md) for more details.
+5. Build your changes using `./build.sh` from the project root directory (this command correctly builds and bundles all the files in production mode and optimizes the build for the best performance).\
+To make development easier:
+   - In react, there is a mock with `npm start` from `/popup` directory, it supports live updates, check [/popup/README.md](/popup/README.md) for more details.
+   - In content scripts, there is live updates with `npm start` from `/content-scripts` directory.
 6. Test your changes to ensure they work as expected.
 7. Commit your changes with a descriptive commit message.
 8. Push your changes to your forked repository.

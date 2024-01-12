@@ -1,0 +1,28 @@
+{
+  "name": "video-experience-enhancer-content-scripts",
+  "version": "2.0.0",
+  "description": "Content scripts for video experience enhancer Chrome extension",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "start": "webpack serve --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walidghallab/video-experience-enhancer.git"
+  },
+  "author": "Walid Ghallab <wa.ghallab@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/walidghallab/video-experience-enhancer/issues"
+  },
+  "homepage": "https://github.com/walidghallab/video-experience-enhancer#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.256",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
