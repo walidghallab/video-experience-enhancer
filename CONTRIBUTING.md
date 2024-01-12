@@ -26,6 +26,7 @@ The project follows the following structure:
 - **`/src`** directory contains the final chrome extension content.
 - **`/test`** directory contains integration tests.
 - **`/popup`** directory contains the popup page (that gets displayed when the user click on the extension icon). It only exist for development and get built into `/src` directory by running `npm run build` from `/popup` directory.
+- **`/content-scripts`** directory contains the content scripts (that runs when the user opens the specified page). It only exist for development and get built into `/src` directory by running `npm run build` from `/content-scripts` directory.
 
 ## Installation from source code (for development)
 
