@@ -22,11 +22,11 @@
   "content_scripts": [
     {
       "matches": ["https://*.coursera.org/*"],
-      "js": ["coursera.js"]
+      "js": ["content_scripts/coursera.js"]
     },
     {
       "matches": ["https://*/*", "http://*/*"],
-      "js": ["all-websites.js"]
+      "js": ["content_scripts/all_websites.js"]
     }
   ]
 }

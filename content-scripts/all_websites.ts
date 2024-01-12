@@ -18,7 +18,7 @@
     });
   });
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     const video = document.querySelector("video");
     if (!video) {
       return;

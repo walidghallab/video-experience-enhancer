@@ -24,10 +24,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
-      - run: npm ci
-        working-directory: ./popup
-      - run: npm run build
-        working-directory: ./popup
+      - run: ./build.sh
       - run: npm ci
         working-directory: ./tests
       - run: npm test
