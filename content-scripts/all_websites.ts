@@ -33,7 +33,9 @@
       if (e.ctrlKey) {
         switch (e.key) {
           case "ArrowUp":
-            video.playbackRate += 0.5;
+            if (video.playbackRate < 16) {
+              video.playbackRate += 0.5;
+            }
             e.preventDefault();
             break;
           case "ArrowDown":
