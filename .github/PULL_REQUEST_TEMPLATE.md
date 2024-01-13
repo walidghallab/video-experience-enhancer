@@ -13,7 +13,7 @@
 - [ ] I have tested the changes locally.
 - [ ] I have added necessary documentation or updated existing documentation.
 - [ ] I have followed the coding style and guidelines of this project.
-- [ ] I have added appropriate unit tests (if applicable).
+- [ ] I have added appropriate unit and/or integration tests (if applicable).
 
 ## Screenshots (if applicable)
 
