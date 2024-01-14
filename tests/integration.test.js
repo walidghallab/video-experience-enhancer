@@ -131,28 +131,38 @@ describe("Video experience enhancer", function () {
       )
       .click();
 
+    console.log("Seeking forward.");
+    const video = await driver.findElement(By.css("video"));
+    let currentTime = Number(await video.getAttribute("currentTime"));
+    await driver.actions().sendKeys(Key.ARROW_RIGHT).perform();
+
+    console.log("Testing that the video is seeked forward.");
+    let newCurrentTime = Number(await video.getAttribute("currentTime"));
+    expect(newCurrentTime).to.be.closeTo(currentTime + 5, 5);
+    currentTime = newCurrentTime;
+
     console.log("Entering fullscreen mode.");
     const fullscreenButton = await driver
       .findElement(By.css('button[title="Fullscreen"]'))
       .click();
 
     console.log("Testing that the video is playing.");
-    const video = await driver.findElement(By.css("video"));
     expect(await video.getProperty("paused")).to.equal(false);
 
     console.log("Pausing the video.");
     await driver.actions().sendKeys(" ").perform();
 
     console.log("Testing that the video is paused.");
+    await video.click(); // Focus the element.
     expect(await video.getProperty("paused")).to.equal(true);
 
-    let currentTime = Number(await video.getAttribute("currentTime"));
+    currentTime = Number(await video.getAttribute("currentTime"));
 
     console.log("Seeking forward.");
     await driver.actions().sendKeys(Key.ARROW_RIGHT).perform();
 
     console.log("Testing that the video is seeked forward.");
-    let newCurrentTime = Number(await video.getAttribute("currentTime"));
+    newCurrentTime = Number(await video.getAttribute("currentTime"));
     expect(newCurrentTime).to.be.closeTo(currentTime + 5, 5);
     currentTime = newCurrentTime;
 
@@ -171,7 +181,6 @@ describe("Video experience enhancer", function () {
     expect(await video.getProperty("paused")).to.equal(false);
 
     console.log("Pressing 'c' to show the English subtitles.");
-    await video.click(); // Focus the element.
     await driver.actions().sendKeys("c").perform();
 
     console.log("Testing that the English subtitles are shown.");

@@ -1,6 +1,4 @@
-import {
-  keyboardEventToString,
-} from "../popup/src/common/keyboard_shortcuts";
+import { keyboardEventToString } from "../popup/src/common/keyboard_shortcuts";
 import { LiveProxyStorage, executeKeyboardEventListener } from "./utils";
 
 executeKeyboardEventListener(handleKeyDown);
