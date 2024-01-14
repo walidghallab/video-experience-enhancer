@@ -21,5 +21,5 @@ echo "$SOURCE_FILE_CONTENT" > $SOURCE_FILE
 sed -i 's/src="\//src="/g' $BUILD_PATH/index.html
 sed -i 's/href="\//href="/g' $BUILD_PATH/index.html
 
-sed 's/<link rel="manifest" href="manifest.json"\/>//' index.html 
+sed -i 's/<link rel="manifest" href="manifest.json"\/>//' $BUILD_PATH/index.html 
 rm $BUILD_PATH/manifest.json
