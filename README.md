@@ -17,21 +17,22 @@ Once the extension is installed, you can use it by following these steps:
 
 ## Supported functionality
 
-**Keyboard shortcuts:**
+**Default keyboard shortcuts (can be edited in the extension):**
 
-| Keyboard shortcut | Functionality                       | Websites              | Notes                                                                                      |
-| ----------------- | ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------ |
-| Ctrl + Arrow Up   | Increase video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video)       |
-| Ctrl + Arrow Down | Decrease video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
-| C or c            | Show/Hide English subtitles         | coursera.org          | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
-| Space             | Play/Pause video                    | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| Arrow Left        | Seek video backward 5 seconds       | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| Arrow Right       | Seek video forward 5 seconds        | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| F or f            | Exit full-screen mode               | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Default keyboard shortcut | Functionality                       | Websites              | Notes                                                                                      |
+| ------------------------- | ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------ |
+| Ctrl + Arrow Up           | Increase video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video)       |
+| Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
+| C or c                    | Show/Hide English subtitles         | coursera.org          | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
+| Space                     | Play/Pause video                    | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Arrow Left                | Seek video backward 5 seconds       | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Arrow Right               | Seek video forward 5 seconds        | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| F or f                    | Exit full-screen mode               | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
 
 **Extra functionality:**
 
-- A button inside the popup to enable/disable the extension globally _instantly_ without need to refresh any pages.
+- A button inside the popup to enable/disable the extension globally _instantly_ accross all devices without need to refresh any pages.
+- Ability to edit keyboard shortcuts _instantly_ accross all devices without need to refresh any pages.
 
 For adding more functionality or websites, please submit [feature requests](#feature-requests).
 
