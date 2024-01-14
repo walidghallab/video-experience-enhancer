@@ -15,7 +15,7 @@ dl {
 
 body {
   font-size: 14px;
-  width: 240px;
+  width: 250px;
 }
 
 dt {
@@ -35,8 +35,8 @@ dd {
 }
 
 .margin-around-medium {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 @keyframes animated-gradient {
@@ -69,6 +69,10 @@ dd {
 .success {
   background-color: #449a3c;
   color: white;
+}
+
+.error-text {
+  color: #ff2a00;
 }
 
 table.popup {

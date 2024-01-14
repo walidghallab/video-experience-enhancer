@@ -37,13 +37,38 @@ describe("Video experience enhancer", function () {
   });
 
   it("popup renders correctly", async function () {
+    console.log("Opening the extension popup");
     await driver.get(`chrome-extension://${EXTENSION_ID}/popup/index.html`);
     const headerText = await driver.findElement(By.css("h1")).getText();
-    console.log(headerText);
     expect(headerText).to.equal("Welcome to video experience enhancer");
   });
 
-  it("video controls works correctly on Coursera", async function () {
+  it("edits keyboard shortcuts correctly", async function () {
+    console.log("Opening the extension popup");
+    await driver.get(`chrome-extension://${EXTENSION_ID}/popup/index.html`);
+
+    console.log('Clicking on "Edit keyboard shortcuts"');
+    await driver.findElement(By.css("#edit-shortcuts")).click();
+
+    console.log(
+      'Change the shortcut for "Toggle English subtitles" to Ctrl + E/e'
+    );
+    await driver.findElement(By.css("#toggle-english-subtitles")).click();
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys("e")
+      .keyUp(Key.CONTROL)
+      .perform();
+    const actualKeyValue = await driver
+      .findElement(By.css("#toggle-english-subtitles"))
+      .getAttribute("value");
+    const expectedKeyValue = "Ctrl + E/e";
+    expect(actualKeyValue).to.equal(expectedKeyValue);
+
+    console.log("Saving the shortcut changes");
+    await driver.findElement(By.css("#save-shortcuts")).click();
+
     console.log("Opening Coursera page with a video.");
     await driver.get(
       `https://www.coursera.org/lecture/generative-ai-for-everyone/welcome-chD5R`
@@ -51,7 +76,48 @@ describe("Video experience enhancer", function () {
 
     if (!RUN_IN_HEADLESS_MODE) {
       console.log("Accepting cookies.");
-      // Waiting for the cookies bar to load.
+      // Waiting for the cookies bar to finish loading.
+      // This is needed because in the cookies bar is moving in the beginning so attempting to click after it is being in the DOM it will fail.
+      await sleep(1 * SECOND);
+      const cookiesButton = await driver
+        .findElement(By.css("#onetrust-accept-btn-handler"))
+        .click();
+    }
+
+    console.log("Loading and playing the video.");
+    await driver
+      .findElement(
+        By.css('button[data-track-component="click_play_video_button"]')
+      )
+      .click();
+
+    console.log("Pressing 'Ctrl + e' to show the English subtitles.");
+    const video = await driver.findElement(By.css("video"));
+    await video.click(); // Focus the element.
+    await driver
+      .actions()
+      .keyDown(Key.CONTROL)
+      .sendKeys("e")
+      .keyUp(Key.CONTROL)
+      .perform();
+
+    console.log("Testing that the English subtitles are shown.");
+    const englishTrack = await video
+      .getProperty("textTracks")
+      .then((tracks) => tracks.find((track) => track.language === "en"));
+    expect(await englishTrack.mode).to.equal("showing");
+  });
+
+  it("video keyboard shortcuts works correctly on Coursera", async function () {
+    console.log("Opening Coursera page with a video.");
+    await driver.get(
+      `https://www.coursera.org/lecture/generative-ai-for-everyone/welcome-chD5R`
+    );
+
+    if (!RUN_IN_HEADLESS_MODE) {
+      console.log("Accepting cookies.");
+      // Waiting for the cookies bar to finish loading.
+      // This is needed because in the cookies bar is moving in the beginning so attempting to click after it is being in the DOM it will fail.
       await sleep(1 * SECOND);
       const cookiesButton = await driver
         .findElement(By.css("#onetrust-accept-btn-handler"))
@@ -155,7 +221,7 @@ describe("Video experience enhancer", function () {
     expect(await video.getProperty("playbackRate")).to.equal(1.5);
   });
 
-  it("video controls works correctly on Youtube", async function () {
+  it("video keyboard shortcuts works correctly on Youtube", async function () {
     console.log("Opening Youtube page with a video.");
     await driver.get(`https://www.youtube.com/watch?v=byauTRO4t30`);
 

@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { defaultShortcuts , KeyboardShortcuts, keyboardShortcutsFromUnknown, KeyboardShortcutStorageKey} from "./common/keyboard_shortcuts";
 
 export declare interface ChromeContextProps {
   url: string;
   disabled: boolean;
   setDisabled: (disabled: boolean) => void;
+  keyboardShortcuts: KeyboardShortcuts;
+  setKeyboardShortcuts: (shortcuts: KeyboardShortcuts) => void;
 }
 
 function getCurrentUrl(mockValue?: ChromeContextProps): Promise<string> {
@@ -24,6 +27,30 @@ function getCurrentUrl(mockValue?: ChromeContextProps): Promise<string> {
   });
 }
 
+function getKeyboardShortcuts(
+  mockValue?: ChromeContextProps
+): Promise<KeyboardShortcuts> {
+  if (mockValue) {
+    return Promise.resolve(mockValue.keyboardShortcuts);
+  }
+  return new Promise((resolve) => {
+    chrome.storage.sync.get([KeyboardShortcutStorageKey], (result) => {
+      resolve(keyboardShortcutsFromUnknown(result[KeyboardShortcutStorageKey]));
+    });
+  });
+}
+
+function setKeyboardShortcutsInStorage(shortcuts: KeyboardShortcuts, mockValue?: ChromeContextProps): Promise<void> {
+  if (mockValue) {
+    return Promise.resolve(mockValue.setKeyboardShortcuts(shortcuts));
+  }
+  return new Promise((resolve) => {
+    chrome.storage.sync.set({ keyboardShortcuts: shortcuts }, () => {
+      resolve();
+    });
+  });
+}
+
 function getDisabledState(mockValue?: ChromeContextProps): Promise<boolean> {
   if (mockValue) {
     return Promise.resolve(mockValue.disabled);
@@ -35,7 +62,10 @@ function getDisabledState(mockValue?: ChromeContextProps): Promise<boolean> {
   });
 }
 
-function setDisabledState(disabled: boolean, mockValue?: ChromeContextProps): Promise<void> {
+function setDisabledInStorage(
+  disabled: boolean,
+  mockValue?: ChromeContextProps
+): Promise<void> {
   if (mockValue) {
     return Promise.resolve(mockValue.setDisabled(disabled));
   }
@@ -46,11 +76,18 @@ function setDisabledState(disabled: boolean, mockValue?: ChromeContextProps): Pr
   });
 }
 
-const ChromeContext = createContext<ChromeContextProps|undefined>(undefined);
+const ChromeContext = createContext<ChromeContextProps | undefined>(undefined);
 
-function ChromeContextProvider({children, mockValue}: { children: React.ReactNode, mockValue?: ChromeContextProps }) {
+function ChromeContextProvider({
+  children,
+  mockValue,
+}: {
+  children: React.ReactNode;
+  mockValue?: ChromeContextProps;
+}) {
   const [url, setUrl] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [keyboardShortcuts, setKeyboardShortcuts] = useState<KeyboardShortcuts>(defaultShortcuts);
 
   useEffect(() => {
     getCurrentUrl(mockValue).then((url) => {
@@ -64,18 +101,38 @@ function ChromeContextProvider({children, mockValue}: { children: React.ReactNod
     });
   }, [mockValue]);
 
-  // Used useMemo to avoid unnecessary re-renders since it is passed in the 'value' dependencies (bec of ESLint).
-  const updateDisabledState = useMemo(() => function (disabled: boolean) {
-    setDisabled(disabled);
-    setDisabledState(disabled, mockValue);
+  useEffect(() => {
+    getKeyboardShortcuts(mockValue).then((shortcuts) => {
+      setKeyboardShortcuts(shortcuts);
+    });
   }, [mockValue]);
-  
-  const value = useMemo(() => ({ url, disabled, setDisabled: updateDisabledState}), [url, disabled, updateDisabledState]);
+
+  // Used useMemo to avoid unnecessary re-renders since it is passed in the dependencies of 'value'.
+  const updateDisabledState = useMemo(
+    () =>
+      function (disabled: boolean) {
+        setDisabled(disabled);
+        setDisabledInStorage(disabled, mockValue);
+      },
+    [mockValue]
+  );
+
+  const updateKeyboardShortcuts = useMemo(
+    () =>
+      function (shortcuts: KeyboardShortcuts) {
+        setKeyboardShortcuts(shortcuts);
+        setKeyboardShortcutsInStorage(shortcuts, mockValue);
+      },
+    [mockValue]
+  );
+
+  const value = useMemo(
+    () => ({ url, disabled, setDisabled: updateDisabledState, keyboardShortcuts, setKeyboardShortcuts: updateKeyboardShortcuts }),
+    [url, disabled, updateDisabledState, keyboardShortcuts, updateKeyboardShortcuts]
+  );
 
   return (
-    <ChromeContext.Provider value={value}>
-      {children}
-    </ChromeContext.Provider>
+    <ChromeContext.Provider value={value}>{children}</ChromeContext.Provider>
   );
 }
 
