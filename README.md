@@ -19,15 +19,15 @@ Once the extension is installed, you can use it by following these steps:
 
 **Default keyboard shortcuts (can be edited in the extension):**
 
-| Default keyboard shortcut | Functionality                       | Websites              | Notes                                                                                      |
-| ------------------------- | ----------------------------------- | --------------------- | ------------------------------------------------------------------------------------------ |
-| Ctrl + Arrow Up           | Increase video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video)       |
-| Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
-| C or c                    | Show/Hide English subtitles         | coursera.org          | Works in both full-screen mode and non full-screen mode (when foucs is on the video).      |
-| Space                     | Play/Pause video                    | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| Arrow Left                | Seek video backward 5 seconds       | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| Arrow Right               | Seek video forward 5 seconds        | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
-| F or f                    | Exit full-screen mode               | coursera.org          | Works only in full-screen mode as it is already working correctly in non full-screen mode. |
+| Default keyboard shortcut | Functionality                       | Websites              |
+| ------------------------- | ----------------------------------- | --------------------- |
+| Ctrl + Arrow Up           | Increase video playback rate by 0.5 | All http & https urls |
+| Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls |
+| C or c                    | Show/Hide English subtitles         | coursera.org          |
+| Space                     | Play/Pause video                    | coursera.org          |
+| Arrow Left                | Seek video backward 5 seconds       | coursera.org          |
+| Arrow Right               | Seek video forward 5 seconds        | coursera.org          |
+| F or f                    | Exit full-screen mode               | coursera.org          |
 
 **Extra functionality:**
 
