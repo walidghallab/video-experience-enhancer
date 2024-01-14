@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ChromeContextProvider  from './ChromeContext';
+import ChromeContextProvider from './ChromeContext';
+import { defaultShortcuts , KeyboardShortcuts} from "./common/keyboard_shortcuts";
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 let disabled = false;
+let shortcuts = defaultShortcuts;
 
 const mockValue = {
   url: "https://coursera.org/",
@@ -17,7 +20,12 @@ const mockValue = {
   setDisabled: (newDisabled: boolean) => {
     disabled = newDisabled;
   },
+  keyboardShortcuts: shortcuts,
+  setKeyboardShortcuts: (newShortcuts: KeyboardShortcuts) => {
+    shortcuts = newShortcuts;
+  },
 };
+
 root.render(
   <React.StrictMode>
     {/* The mockValue gets removed automatically by the build script to use the real values for the extension. */}

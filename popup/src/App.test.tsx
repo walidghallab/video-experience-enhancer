@@ -1,14 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 import ChromeContextProvider, { ChromeContextProps } from "./ChromeContext";
+import { defaultShortcuts , KeyboardShortcuts} from "./common/keyboard_shortcuts";
 
+// TODO: Generalize this function to be used in other places (e.g. index.tsx).
 function newMockForUrl(url: string): ChromeContextProps {
   let disabled = false;
+  let shortcuts = defaultShortcuts;
   return {
     url,
     disabled,
     setDisabled: (newDisabled: boolean) => {
       disabled = newDisabled;
+    },
+    keyboardShortcuts: shortcuts,
+    setKeyboardShortcuts: (newShortcuts: KeyboardShortcuts) => {
+      shortcuts = newShortcuts;
     },
   };
 }
