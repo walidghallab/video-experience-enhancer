@@ -8,10 +8,10 @@ node_modules/
 **/.pnp
 **/.pnp.js
 
-# testing
+# Testing
 **/coverage
 
-# production
+# Production
 /src/popup
 /src/content_scripts
 
@@ -43,4 +43,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Used in Makefile
 **/*.mkf
+
+# Misc
+hack/video-experience-enhancer.zip
