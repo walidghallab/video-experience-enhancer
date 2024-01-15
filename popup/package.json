@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "build": "./build-react.sh",
     "test": "react-scripts test",
+    "test-without-watch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

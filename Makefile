@@ -5,8 +5,8 @@ build:
 
 test:
 	@echo "Running All Tests"
-	@make integration-tests
-	@make unit-tests
+	@make integration-test
+	@make unit-test
 	
 install-popup: popup/.installed.mkf
 
@@ -23,23 +23,23 @@ popup/.built.mkf: $(shell find ./popup -type f -not -ipath "*/node_modules*" -no
 	@cd ./popup && npm run build
 	@touch popup/.built.mkf
 	
-install-tests: tests/.installed.mkf
+install-integration-tests: integration-tests/.installed.mkf
 
-tests/.installed.mkf: tests/package.json
+integration-tests/.installed.mkf: integration-tests/package.json
 	@echo "Installing Tests"
-	@cd ./tests && npm ci
-	@touch tests/.installed.mkf
+	@cd ./integration-tests && npm ci
+	@touch integration-tests/.installed.mkf
 	
-integration-tests:
-	@make install-tests
+integration-test:
+	@make install-integration-tests
 	@make build
 	@echo "Running Integration Tests"
-	@cd ./tests && npm test
+	@cd ./integration-tests && npm test
 	
-unit-tests:
+unit-test:
 	@make install-popup
 	@echo "Running Unit Tests"
-	@cd ./popup && npm test
+	@cd ./popup && npm run test-without-watch
 
 install-content-scripts: content-scripts/.installed.mkf
 	
