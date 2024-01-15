@@ -30,7 +30,7 @@ The project follows the following structure:
 
 To install the extension from the source code, follow these steps:
 
-1. Run this command to clone the repository and build the necessary files.
+1. Run this command to clone the repository and build the necessary files (**if you want to use your local version, only run `make` and skip the rest**).
 
 ```bash
 npm -v > /dev/null &&
