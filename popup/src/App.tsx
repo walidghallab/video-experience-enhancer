@@ -2,14 +2,14 @@ import "./App.css";
 import Loader from "./Loader";
 import { useChromeContext } from "./ChromeContext";
 import DisableApplication from "./DisableApplication";
-import { Button, TextField, Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import {
   DISABLED_KEYBOARD_SHORTCUT,
   defaultShortcuts,
-  keyboardEventToString,
 } from "./common/keyboard_shortcuts";
+import KeyboardPressInput from "./KeyboardPressInput";
 
 const supportedUrlsRegex = ["https://(.*.)?coursera.org/.*"].map(
   (url) => new RegExp(url)
@@ -125,32 +125,6 @@ function UnsupportedUrl() {
 
 function isSupportedDomain(url: string) {
   return supportedUrlsRegex.some((urlRegex) => url.match(urlRegex));
-}
-
-function KeyboardPressInput(props: {
-  value: string;
-  setvalue: (value: string) => void;
-  label: string;
-  id?: string;
-}) {
-  const handleCapture = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    event.preventDefault();
-
-    const pressedValue = keyboardEventToString(event);
-
-    props.setvalue(pressedValue);
-  };
-
-  return (
-    <TextField
-      id={props.id}
-      size="small"
-      label={props.label}
-      value={props.value}
-      onKeyDown={handleCapture}
-      InputProps={{ readOnly: true }}
-    />
-  );
 }
 
 function EditShortcuts(props: { finishedEditing: () => void }) {

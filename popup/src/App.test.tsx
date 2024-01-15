@@ -27,16 +27,15 @@ describe.each([
   ["supported websites", SUPPORTED_WEBSITE],
   ["unsupported websites", UNSUPPORTED_WEBSITE],
 ])("for %s", (name, mockValue) => {
-  it("renders welcome text", () => {
+  it("renders welcome text", async () => {
     render(
       <ChromeContextProvider mockValue={mockValue}>
         <App />
       </ChromeContextProvider>
     );
-    const headerText = screen.getByText(
+    await screen.findByText(
       /Welcome to video experience enhancer/i
     );
-    expect(headerText).toBeInTheDocument();
   });
 
   it("renders filing request text", async () => {
@@ -63,15 +62,14 @@ describe("for supported websites", () => {
 });
 
 describe("for unsupported websites", () => {
-  it("renders welcome text", () => {
+  it("renders welcome text", async () => {
     render(
       <ChromeContextProvider mockValue={UNSUPPORTED_WEBSITE}>
         <App />
       </ChromeContextProvider>
     );
-    const headerText = screen.getByText(
+    await screen.findByText(
       /Welcome to video experience enhancer/i
     );
-    expect(headerText).toBeInTheDocument();
   });
 });
