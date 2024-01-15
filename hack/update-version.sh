@@ -3,7 +3,7 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
-newVersion=$1
+NEW_VERSION=$1
 
 # Args: $1: error message
 function print_error() {
@@ -20,36 +20,36 @@ if [[ ! $PWD == *hack ]]; then
     exit 1
 fi
 
-if [[ $newVersion == "" ]]; then
+if [[ $NEW_VERSION == "" ]]; then
     print_error 'You must specify the new version as the first argument'
     exit 1
 fi
 
 # Args: $1: file, $2: new version
 function updateVersion() {
-    FILEPATH=$1
-    if [[ ! -f $FILEPATH ]]; then
-        print_error "File $FILEPATH does not exist"
+    filePath=$1
+    if [[ ! -f $filePath ]]; then
+        print_error "File $filePath does not exist"
         exit 1
     fi
-    NEW_VERSION=$2
-    if [[ $NEW_VERSION == "" ]]; then
+    newVersion=$2
+    if [[ $newVersion == "" ]]; then
         print_error "New version is empty"
         exit 1
     fi
-    sed -i "0,/\"version\": \".*\"/s//\"version\": \"$NEW_VERSION\"/" $FILEPATH
+    sed -i "0,/\"version\": \".*\"/s//\"version\": \"$newVersion\"/" $filePath
     if [[ $? != "0" ]]; then
-        print_error "Failed to update version in $FILEPATH"
+        print_error "Failed to update version in $filePath"
         exit 1
     fi
 }
 
-updateVersion ../src/manifest.json $newVersion
-updateVersion ../content-scripts/package.json $newVersion
-updateVersion ../content-scripts/package-lock.json $newVersion
-updateVersion ../integration-tests/package.json $newVersion
-updateVersion ../integration-tests/package-lock.json $newVersion
-updateVersion ../popup/package.json $newVersion
-updateVersion ../popup/package-lock.json $newVersion
+updateVersion ../src/manifest.json $NEW_VERSION
+updateVersion ../content-scripts/package.json $NEW_VERSION
+updateVersion ../content-scripts/package-lock.json $NEW_VERSION
+updateVersion ../integration-tests/package.json $NEW_VERSION
+updateVersion ../integration-tests/package-lock.json $NEW_VERSION
+updateVersion ../popup/package.json $NEW_VERSION
+updateVersion ../popup/package-lock.json $NEW_VERSION
 
 print_success 'All versions have been updated successfully'
