@@ -21,7 +21,7 @@ export declare interface ChromeContextProps {
  */
 export function getMockValue(): ChromeContextProps {
   let disabled = false;
-  let shortcuts = defaultShortcuts;
+  let shortcuts = {...defaultShortcuts};
   return {
     url: "https://coursera.org/",
     disabled,
