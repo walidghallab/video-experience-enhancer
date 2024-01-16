@@ -39,7 +39,7 @@ integration-test:
 unit-test:
 	@make install-popup
 	@echo "Running Unit Tests"
-	@cd ./popup && npm run test-without-watch
+	@cd ./popup && npm run test:without-watch
 
 install-content-scripts: content-scripts/.installed.mkf
 	
