@@ -1,22 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import ChromeContextProvider, { ChromeContextProps } from "./ChromeContext";
-import { defaultShortcuts , KeyboardShortcuts} from "./common/keyboard_shortcuts";
+import ChromeContextProvider, {
+  ChromeContextProps,
+  getMockValue,
+} from "./ChromeContext";
 
-// TODO: Generalize this function to be used in other places (e.g. index.tsx).
 function newMockForUrl(url: string): ChromeContextProps {
-  let disabled = false;
-  let shortcuts = defaultShortcuts;
   return {
+    ...getMockValue(),
     url,
-    disabled,
-    setDisabled: (newDisabled: boolean) => {
-      disabled = newDisabled;
-    },
-    keyboardShortcuts: shortcuts,
-    setKeyboardShortcuts: (newShortcuts: KeyboardShortcuts) => {
-      shortcuts = newShortcuts;
-    },
   };
 }
 
@@ -33,9 +25,7 @@ describe.each([
         <App />
       </ChromeContextProvider>
     );
-    await screen.findByText(
-      /Welcome to video experience enhancer/i
-    );
+    await screen.findByText(/Welcome to video experience enhancer/i);
   });
 
   it("renders filing request text", async () => {
@@ -68,8 +58,6 @@ describe("for unsupported websites", () => {
         <App />
       </ChromeContextProvider>
     );
-    await screen.findByText(
-      /Welcome to video experience enhancer/i
-    );
+    await screen.findByText(/Welcome to video experience enhancer/i);
   });
 });
