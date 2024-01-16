@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { defaultShortcuts , KeyboardShortcuts, keyboardShortcutsFromUnknown, KeyboardShortcutStorageKey} from "./common/keyboard_shortcuts";
+import {
+  defaultShortcuts,
+  KeyboardShortcuts,
+  keyboardShortcutsFromUnknown,
+  KeyboardShortcutStorageKey,
+} from "./common/keyboard_shortcuts";
 
 export declare interface ChromeContextProps {
   url: string;
@@ -7,6 +12,27 @@ export declare interface ChromeContextProps {
   setDisabled: (disabled: boolean) => void;
   keyboardShortcuts: KeyboardShortcuts;
   setKeyboardShortcuts: (shortcuts: KeyboardShortcuts) => void;
+}
+
+/**
+ *  Returns mock value for {@link ChromeContextProps}.
+ * 
+ * __Should never be used in production code.__
+ */
+export function getMockValue(): ChromeContextProps {
+  let disabled = false;
+  let shortcuts = defaultShortcuts;
+  return {
+    url: "https://coursera.org/",
+    disabled,
+    setDisabled: (newDisabled: boolean) => {
+      disabled = newDisabled;
+    },
+    keyboardShortcuts: shortcuts,
+    setKeyboardShortcuts: (newShortcuts: KeyboardShortcuts) => {
+      shortcuts = newShortcuts;
+    },
+  };
 }
 
 function getCurrentUrl(mockValue?: ChromeContextProps): Promise<string> {
@@ -40,7 +66,10 @@ function getKeyboardShortcuts(
   });
 }
 
-function setKeyboardShortcutsInStorage(shortcuts: KeyboardShortcuts, mockValue?: ChromeContextProps): Promise<void> {
+function setKeyboardShortcutsInStorage(
+  shortcuts: KeyboardShortcuts,
+  mockValue?: ChromeContextProps
+): Promise<void> {
   if (mockValue) {
     return Promise.resolve(mockValue.setKeyboardShortcuts(shortcuts));
   }
@@ -87,7 +116,8 @@ function ChromeContextProvider({
 }) {
   const [url, setUrl] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [keyboardShortcuts, setKeyboardShortcuts] = useState<KeyboardShortcuts>(defaultShortcuts);
+  const [keyboardShortcuts, setKeyboardShortcuts] =
+    useState<KeyboardShortcuts>(defaultShortcuts);
 
   useEffect(() => {
     getCurrentUrl(mockValue).then((url) => {
@@ -127,8 +157,20 @@ function ChromeContextProvider({
   );
 
   const value = useMemo(
-    () => ({ url, disabled, setDisabled: updateDisabledState, keyboardShortcuts, setKeyboardShortcuts: updateKeyboardShortcuts }),
-    [url, disabled, updateDisabledState, keyboardShortcuts, updateKeyboardShortcuts]
+    () => ({
+      url,
+      disabled,
+      setDisabled: updateDisabledState,
+      keyboardShortcuts,
+      setKeyboardShortcuts: updateKeyboardShortcuts,
+    }),
+    [
+      url,
+      disabled,
+      updateDisabledState,
+      keyboardShortcuts,
+      updateKeyboardShortcuts,
+    ]
   );
 
   return (
