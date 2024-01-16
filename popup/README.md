@@ -21,6 +21,10 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run test:debug`
+
+Command used for debugging. You can use it with Chrome or with VS Code. Instructions on how to use it are [here](https://create-react-app.dev/docs/debugging-tests/).
+
 ### `npm run build`
 
 Builds the app for production to the `/src/popup` directory.\
