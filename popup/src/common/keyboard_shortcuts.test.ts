@@ -1,5 +1,5 @@
 import {
-  defaultShortcuts,
+  DEFAULT_SHORTCUTS,
   keyboardEventToString,
   keyboardShortcutsFromUnknown,
 } from "./keyboard_shortcuts";
@@ -82,14 +82,14 @@ describe("keyboardShortcutsFromUnknown method", () => {
     {
       description: "returns the default shortcuts when given an empty object",
       input: {},
-      expected: defaultShortcuts,
+      expected: DEFAULT_SHORTCUTS,
       expectedToThrow: false,
     },
     {
       description:
         "returns the default shortcuts when given an undefined value",
       input: undefined,
-      expected: defaultShortcuts,
+      expected: DEFAULT_SHORTCUTS,
       expectedToThrow: false,
     },
     {

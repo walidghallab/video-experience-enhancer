@@ -17,7 +17,7 @@ const keyboardShortcutsSchema = z.object({
 export declare type KeyboardShortcuts = z.infer<typeof keyboardShortcutsSchema>;
 
 
-export const defaultShortcuts: KeyboardShortcuts = {
+export const DEFAULT_SHORTCUTS: KeyboardShortcuts = Object.freeze({
   playPause: "Space",
   forward: "ArrowRight",
   backward: "ArrowLeft",
@@ -25,7 +25,7 @@ export const defaultShortcuts: KeyboardShortcuts = {
   subtitles: "C/c",
   increasePlaybackRate: "Ctrl + ArrowUp",
   decreasePlaybackRate: "Ctrl + ArrowDown",
-};
+});
 
 function checkValueExists(
   value: string,
@@ -36,11 +36,11 @@ function checkValueExists(
 
 export function keyboardShortcutsFromUnknown(unparsedKeyboardShortcuts: unknown): KeyboardShortcuts {
   if (!unparsedKeyboardShortcuts) {
-    return defaultShortcuts;
+    return DEFAULT_SHORTCUTS;
   }
   const parsedKeyboardShortcuts = keyboardShortcutsSchema.partial().parse(unparsedKeyboardShortcuts);
   let shortcuts: Partial<KeyboardShortcuts> = {};
-  for (const [k, v] of Object.entries(defaultShortcuts) as Array<
+  for (const [k, v] of Object.entries(DEFAULT_SHORTCUTS) as Array<
     [keyof KeyboardShortcuts, string]
   >) {
     if (

@@ -1,4 +1,4 @@
-import { KeyboardShortcuts, defaultShortcuts } from "../common/keyboard_shortcuts";
+import { KeyboardShortcuts, DEFAULT_SHORTCUTS } from "../common/keyboard_shortcuts";
 import { ChromeContextProps } from "../contexts/ChromeContext";
 
 /**
@@ -8,7 +8,7 @@ import { ChromeContextProps } from "../contexts/ChromeContext";
  */
 export function getMockValueForChromeContextProps(): ChromeContextProps {
     let disabled = false;
-    let shortcuts = {...defaultShortcuts};
+    let shortcuts = {...DEFAULT_SHORTCUTS};
     return {
       url: "https://coursera.org/",
       disabled,

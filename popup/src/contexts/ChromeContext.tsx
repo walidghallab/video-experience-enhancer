@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
-  defaultShortcuts,
+  DEFAULT_SHORTCUTS,
   KeyboardShortcuts,
   keyboardShortcutsFromUnknown,
   KeyboardShortcutStorageKey,
@@ -96,7 +96,7 @@ function ChromeContextProvider({
   const [url, setUrl] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [keyboardShortcuts, setKeyboardShortcuts] =
-    useState<KeyboardShortcuts>(defaultShortcuts);
+    useState<KeyboardShortcuts>(DEFAULT_SHORTCUTS);
 
   useEffect(() => {
     getCurrentUrl(mockValue).then((url) => {
