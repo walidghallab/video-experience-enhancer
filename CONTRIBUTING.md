@@ -57,7 +57,8 @@ Note that if you install it this way, it will get automatically removed every ti
   - `make integration-tests`: Runs only integration tests in the project.
   - `make unit-tests`: Runs only unit tests in the project. A few notes if you are developing inside `/popup` directory:
     - You can run `npm test` from there to run tests with --watch 
-    - You can  debug them with `npm run test:debug`, instructions are [here](https://create-react-app.dev/docs/debugging-tests/).
+    - You can debug them using `npm run test:debug`, instructions are [here](https://create-react-app.dev/docs/debugging-tests/).
+    - You can print test coverage report using `npm run test:coverage`
 
 ## Code Style
 

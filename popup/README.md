@@ -25,6 +25,14 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Command used for debugging. You can use it with Chrome or with VS Code. Instructions on how to use it are [here](https://create-react-app.dev/docs/debugging-tests/).
 
+### `npm run test:coverage`
+
+Command used for printing test coverage report.
+
+### `npm run test:without-watch`
+
+Command used for running all the tests without watch mode. Used from automated scripts and CI.
+
 ### `npm run build`
 
 Builds the app for production to the `/src/popup` directory.\
