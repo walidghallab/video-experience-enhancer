@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useChromeContext } from "./ChromeContext";
-import { defaultShortcuts } from "./common/keyboard_shortcuts";
+import { useChromeContext } from "../contexts/ChromeContext";
+import { defaultShortcuts } from "../common/keyboard_shortcuts";
 import Loader from "./Loader";
 import { Box, Button } from "@mui/material";
 import KeyboardPressInput from "./KeyboardPressInput";

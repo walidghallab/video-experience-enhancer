@@ -4,7 +4,7 @@ import {
   KeyboardShortcuts,
   keyboardShortcutsFromUnknown,
   KeyboardShortcutStorageKey,
-} from "./common/keyboard_shortcuts";
+} from "../common/keyboard_shortcuts";
 
 export declare interface ChromeContextProps {
   url: string;

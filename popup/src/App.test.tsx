@@ -3,7 +3,7 @@ import App from "./App";
 import ChromeContextProvider, {
   ChromeContextProps,
   getMockValue,
-} from "./ChromeContext";
+} from "./contexts/ChromeContext";
 
 function newMockForUrl(url: string): ChromeContextProps {
   return {

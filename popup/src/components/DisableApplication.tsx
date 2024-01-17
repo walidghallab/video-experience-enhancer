@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
-import { useChromeContext } from "./ChromeContext";
 import "./DisableApplication.css";
+import { useChromeContext } from "../contexts/ChromeContext";
 
 function DisableApplication() {
   const { disabled, setDisabled } = useChromeContext()!;

@@ -3,7 +3,7 @@ import EditShortcuts from "./EditShortcuts";
 import ChromeContextProvider, {
   getMockValue,
   useChromeContext,
-} from "./ChromeContext";
+} from "../contexts/ChromeContext";
 
 function TestContextValueForBackward() {
   const chromeContext = useChromeContext();

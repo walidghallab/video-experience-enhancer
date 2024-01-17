@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { keyboardEventToString } from "./common/keyboard_shortcuts";
+import { keyboardEventToString } from "../common/keyboard_shortcuts";
 
 function KeyboardPressInput(props: {
   value: string;
