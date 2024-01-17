@@ -4,7 +4,7 @@ import {
   KeyboardShortcuts,
   keyboardShortcutsFromUnknown,
   KeyboardShortcutStorageKey,
-} from "../common/keyboard_shortcuts";
+} from "./common/keyboard_shortcuts";
 
 export declare interface ChromeContextProps {
   url: string;
@@ -12,6 +12,27 @@ export declare interface ChromeContextProps {
   setDisabled: (disabled: boolean) => void;
   keyboardShortcuts: KeyboardShortcuts;
   setKeyboardShortcuts: (shortcuts: KeyboardShortcuts) => void;
+}
+
+/**
+ *  Returns mock value for {@link ChromeContextProps}.
+ * 
+ * __Should never be used in production code.__
+ */
+export function getMockValue(): ChromeContextProps {
+  let disabled = false;
+  let shortcuts = {...defaultShortcuts};
+  return {
+    url: "https://coursera.org/",
+    disabled,
+    setDisabled: (newDisabled: boolean) => {
+      disabled = newDisabled;
+    },
+    keyboardShortcuts: shortcuts,
+    setKeyboardShortcuts: (newShortcuts: KeyboardShortcuts) => {
+      shortcuts = newShortcuts;
+    },
+  };
 }
 
 function getCurrentUrl(mockValue?: ChromeContextProps): Promise<string> {

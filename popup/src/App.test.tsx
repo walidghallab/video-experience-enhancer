@@ -2,12 +2,12 @@ import { render, screen } from "@testing-library/react";
 import App from "./App";
 import ChromeContextProvider, {
   ChromeContextProps,
-  getMockValue,
 } from "./contexts/ChromeContext";
+import { getMockValueForChromeContextProps } from "./test-helpers/ChromeContextProps.mock";
 
 function newMockForUrl(url: string): ChromeContextProps {
   return {
-    ...getMockValue(),
+    ...getMockValueForChromeContextProps(),
     url,
   };
 }

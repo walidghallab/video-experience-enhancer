@@ -3,13 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ChromeContextProvider, { getMockValue } from "./contexts/ChromeContext";
+import ChromeContextProvider from "./contexts/ChromeContext";
+import { getMockValueForChromeContextProps } from "./test-helpers/ChromeContextProps.mock";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const mockValue = getMockValue();
+const mockValue = getMockValueForChromeContextProps();
 
 root.render(
   <React.StrictMode>

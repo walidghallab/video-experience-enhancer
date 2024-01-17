@@ -1,9 +1,9 @@
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import EditShortcuts from "./EditShortcuts";
 import ChromeContextProvider, {
-  getMockValue,
   useChromeContext,
 } from "../contexts/ChromeContext";
+import { getMockValueForChromeContextProps } from "../test-helpers/ChromeContextProps.mock";
 
 function TestContextValueForBackward() {
   const chromeContext = useChromeContext();
@@ -48,7 +48,7 @@ describe("EditShortcuts", () => {
     }) => {
         // Arrange
       const finishedEditing = jest.fn();
-      const mockValue = getMockValue();
+      const mockValue = getMockValueForChromeContextProps();
       mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
       render(
         <ChromeContextProvider mockValue={mockValue}>
