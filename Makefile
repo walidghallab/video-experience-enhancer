@@ -17,7 +17,7 @@ popup/.installed.mkf: popup/package.json
 
 build-popup: popup/.built.mkf
 
-popup/.built.mkf: $(shell find ./popup -type f -not -ipath "*/node_modules*" -not -path "./popup/.built.mkf")
+popup/.built.mkf: $(shell find ./popup -type f -not -ipath "*/node_modules*" -not -path "./popup/.built.mkf" -not -iregex ".*\.test.tsx?")
 	@make install-popup
 	@echo "Building Popup"
 	@cd ./popup && npm run build
@@ -50,7 +50,7 @@ content-scripts/.installed.mkf: content-scripts/package.json
 
 build-content-scripts: content-scripts/.built.mkf
 
-content-scripts/.built.mkf: $(shell find ./content-scripts -type f -not -ipath "*/node_modules*" -not -path "./content-scripts/.built.mkf")
+content-scripts/.built.mkf: $(shell find ./content-scripts -type f -not -ipath "*/node_modules*" -not -path "./content-scripts/.built.mkf -not -iregex ".*\.test.tsx?"")
 	@make install-content-scripts
 	@echo "Building Content Scripts"
 	@cd ./content-scripts && npm run build
