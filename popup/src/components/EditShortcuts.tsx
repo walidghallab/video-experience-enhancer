@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChromeContext } from "../contexts/ChromeContext";
-import { defaultShortcuts } from "../common/keyboard_shortcuts";
+import { DEFAULT_SHORTCUTS } from "../common/keyboard_shortcuts";
 import Loader from "./Loader";
 import { Box, Button } from "@mui/material";
 import KeyboardPressInput from "./KeyboardPressInput";
@@ -30,13 +30,13 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
     useState(chromeContext?.keyboardShortcuts.decreasePlaybackRate);
 
   function reset() {
-    setPlayPauseShortcut(defaultShortcuts.playPause);
-    setForwardShortcut(defaultShortcuts.forward);
-    setBackwardShortcut(defaultShortcuts.backward);
-    setFullscreenShortcut(defaultShortcuts.fullscreen);
-    setSubtitlesShortcut(defaultShortcuts.subtitles);
-    setIncreasePlaybackRateShortcut(defaultShortcuts.increasePlaybackRate);
-    setDecreasePlaybackRateShortcut(defaultShortcuts.decreasePlaybackRate);
+    setPlayPauseShortcut(DEFAULT_SHORTCUTS.playPause);
+    setForwardShortcut(DEFAULT_SHORTCUTS.forward);
+    setBackwardShortcut(DEFAULT_SHORTCUTS.backward);
+    setFullscreenShortcut(DEFAULT_SHORTCUTS.fullscreen);
+    setSubtitlesShortcut(DEFAULT_SHORTCUTS.subtitles);
+    setIncreasePlaybackRateShortcut(DEFAULT_SHORTCUTS.increasePlaybackRate);
+    setDecreasePlaybackRateShortcut(DEFAULT_SHORTCUTS.decreasePlaybackRate);
   }
 
   const [nonUniqueError, setNonUniqueError] = useState(false);
