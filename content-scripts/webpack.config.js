@@ -20,6 +20,6 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname,"..","src", "content_scripts"),
+    path: path.resolve(__dirname,"..","src", "content-scripts"),
   },
 };

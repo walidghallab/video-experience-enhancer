@@ -13,7 +13,7 @@ node_modules/
 
 # Production
 /src/popup
-/src/content_scripts
+/src/content-scripts
 
 # VSCode project files
 **/.vscode
