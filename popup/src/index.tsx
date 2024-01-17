@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ChromeContextProvider, { getMockValue } from "./ChromeContext";
+import ChromeContextProvider, { getMockValue } from "./contexts/ChromeContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

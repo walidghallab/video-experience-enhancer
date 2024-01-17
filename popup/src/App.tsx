@@ -1,12 +1,12 @@
 import "./App.css";
-import Loader from "./Loader";
-import { useChromeContext } from "./ChromeContext";
-import DisableApplication from "./DisableApplication";
+import Loader from "./components/Loader";
+import { useChromeContext } from "./contexts/ChromeContext";
+import DisableApplication from "./components/DisableApplication";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { DISABLED_KEYBOARD_SHORTCUT } from "./common/keyboard_shortcuts";
-import EditShortcuts from "./EditShortcuts";
+import EditShortcuts from "./components/EditShortcuts";
 
 const supportedUrlsRegex = ["https://(.*.)?coursera.org/.*"].map(
   (url) => new RegExp(url)
