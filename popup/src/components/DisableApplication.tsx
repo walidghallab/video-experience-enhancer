@@ -11,10 +11,19 @@ function DisableApplication() {
   return (
     <div className="switch-container">
       <label className="switch">
-        <input type="checkbox" checked={!disabled} onChange={onChange} />
+        <input
+          type="checkbox"
+          checked={!disabled}
+          onChange={onChange}
+          data-testid="toggle-disable"
+        />
         <span className="slider round"></span>
       </label>
-      {!disabled ? <p className="success">Extension is enabled</p> : <p className="error">Extension is disabled</p>}
+      {!disabled ? (
+        <p className="success">Extension is enabled</p>
+      ) : (
+        <p className="error">Extension is disabled</p>
+      )}
     </div>
   );
 }
