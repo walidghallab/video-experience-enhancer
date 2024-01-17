@@ -49,8 +49,8 @@ function TdForShortcutKey({ shortcutKey }: { shortcutKey?: string }) {
   );
 }
 
-/** SupportedUrl gets displayed when the current url is a website with support for special functionality. */
-function SupportedUrl() {
+/** FullySupportedUrl gets displayed when the current url is a website with full support and special functionality. */
+function FullySupportedUrl() {
   const shortcuts = useChromeContext()?.keyboardShortcuts;
   return (
     <div>
@@ -91,8 +91,8 @@ function SupportedUrl() {
   );
 }
 
-/** CommonUrl gets displayed when the current url is a website with no special added functionality. */
-function CommonUrl() {
+/** PartiallySupportedWebsite gets displayed when the current url is a website with partial support. */
+function PartiallySupportedWebsite() {
   return (
     <div>
       <div className="margin-around-medium">
@@ -141,9 +141,9 @@ function App() {
     if (!url.startsWith("http")) {
       componentToRender = <UnsupportedUrl />;
     } else if (isSupportedDomain(url)) {
-      componentToRender = <SupportedUrl />;
+      componentToRender = <FullySupportedUrl />;
     } else {
-      componentToRender = <CommonUrl />;
+      componentToRender = <PartiallySupportedWebsite />;
     }
   }
 
