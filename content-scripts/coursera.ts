@@ -15,7 +15,6 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
   const keyboardShortcuts = liveProxyStorage.keyboardShortcuts;
   const currentPress = keyboardEventToString(e);
   e.stopImmediatePropagation();
-  e.preventDefault();
 
   // Functionality for both fullscreen and non-fullscreen modes as long as the focused element is the video or an ancestor of the video.
   if (
@@ -40,14 +39,17 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         } else {
           englishTrack.mode = "showing";
         }
+        e.preventDefault();
         break;
 
       case keyboardShortcuts.forward:
         video.currentTime += inc;
+        e.preventDefault();
         break;
 
       case keyboardShortcuts.backward:
         video.currentTime -= inc;
+        e.preventDefault();
         break;
 
       case keyboardShortcuts.playPause:
@@ -56,6 +58,7 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         } else {
           video.pause();
         }
+        e.preventDefault();
         break;
 
       case keyboardShortcuts.fullscreen:
@@ -67,6 +70,7 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         } else {
           console.error("Could not find fullscreen button");
         }
+        e.preventDefault();
         break;
     }
   }
