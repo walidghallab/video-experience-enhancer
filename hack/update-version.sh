@@ -44,12 +44,26 @@ function updateVersion() {
     fi
 }
 
+# Args: $1: error message
+function exit_with_error_if_last_command_failed() {
+    if [[ $? != "0" ]]; then
+        print_error "$1"
+        exit 1
+    fi
+}
+
 updateVersion ../src/manifest.json $NEW_VERSION
+
 updateVersion ../content-scripts/package.json $NEW_VERSION
-updateVersion ../content-scripts/package-lock.json $NEW_VERSION
+cd ../content-scripts && npm i && cd -
+exit_with_error_if_last_command_failed "Failed to update content-scripts package-lock.json"
+
 updateVersion ../integration-tests/package.json $NEW_VERSION
-updateVersion ../integration-tests/package-lock.json $NEW_VERSION
+cd ../integration-tests && npm i && cd -
+exit_with_error_if_last_command_failed "Failed to update integration-tests package-lock.json"
+
 updateVersion ../popup/package.json $NEW_VERSION
-updateVersion ../popup/package-lock.json $NEW_VERSION
+cd ../popup && npm i && cd -
+exit_with_error_if_last_command_failed "Failed to update popup package-lock.json"
 
 print_success 'All versions have been updated successfully'
