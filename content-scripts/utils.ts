@@ -29,7 +29,7 @@ export function executeKeyboardEventListener(
       if (!disabled) {
         document
           .querySelector("body")!
-          .addEventListener("keydown", keyDownEventHandler);
+          .addEventListener("keydown", keyDownEventHandler, true);
       }
 
       chrome.storage.onChanged.addListener(function (changes, namespace) {
@@ -37,11 +37,11 @@ export function executeKeyboardEventListener(
           if (changes.disabled.newValue) {
             document
               .querySelector("body")!
-              .removeEventListener("keydown", keyDownEventHandler);
+              .removeEventListener("keydown", keyDownEventHandler, true);
           } else {
             document
               .querySelector("body")!
-              .addEventListener("keydown", keyDownEventHandler);
+              .addEventListener("keydown", keyDownEventHandler, true);
           }
         }
         if (changes[KeyboardShortcutStorageKey]) {
