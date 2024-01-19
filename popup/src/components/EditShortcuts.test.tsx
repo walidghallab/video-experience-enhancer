@@ -17,21 +17,21 @@ function TestContextValueForBackward() {
 describe("EditShortcuts", () => {
   it.each([
     {
-      name: "saves changes correctly",
+      name: "saves changes context correctly",
       buttonToClick: "Save",
       expectedSavedValue: "Ctrl + A/a",
       expectedShownValue: "Ctrl + A/a",
       expectFinishedEditingBeCalled: true,
     },
     {
-      name: "cancel changes correctly",
+      name: "cancel doesn't change context",
       buttonToClick: "Cancel",
       expectedSavedValue: "Ctrl + E/e",
       expectedShownValue: "Ctrl + A/a",
       expectFinishedEditingBeCalled: true,
     },
     {
-      name: "restore defaults correctly",
+      name: "restore defaults correctly in the input values but not in the context",
       buttonToClick: "Restore defaults",
       expectedSavedValue: "Ctrl + E/e",
       expectedShownValue: "ArrowLeft",
@@ -84,4 +84,64 @@ describe("EditShortcuts", () => {
       expect(input.getAttribute('value')).toBe(expectedShownValue);
     }
   );
+
+  it("shows error when shortcuts are not unique", async () => {
+    // Arrange
+    const mockValue = getMockValueForChromeContextProps();
+    mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
+    render(
+      <ChromeContextProvider mockValue={mockValue}>
+        <EditShortcuts finishedEditing={jest.fn()} />
+      </ChromeContextProvider>
+    );
+    await waitFor(() =>
+      expect(screen.getByLabelText(/Backward 5 seconds/).getAttribute('value')).toBe(
+        "Ctrl + E/e"
+      )
+    );
+
+    // Act
+    const input = await screen.findByLabelText(/Forward 5 seconds/);
+    const mockEvent = {
+      key: "e",
+      code: "KeyE",
+      ctrlKey: true,
+      altKey: false,
+      preventDefault: jest.fn(),
+    };
+    fireEvent.keyDown(input, mockEvent);
+
+    // Assert
+    expect(screen.getByText(/All shortcuts have to be unique/)).toBeInTheDocument();
+  });
+
+  it("shows error when a shortcut is not valid", async () => {
+    // Arrange
+    const mockValue = getMockValueForChromeContextProps();
+    mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
+    render(
+      <ChromeContextProvider mockValue={mockValue}>
+        <EditShortcuts finishedEditing={jest.fn()} />
+      </ChromeContextProvider>
+    );
+    await waitFor(() =>
+      expect(screen.getByLabelText(/Backward 5 seconds/).getAttribute('value')).toBe(
+        "Ctrl + E/e"
+      )
+    );
+
+    // Act
+    const input = await screen.findByLabelText(/Backward 5 seconds/);
+    const mockEvent = {
+      key: "Control",
+      code: "ControlLeft",
+      ctrlKey: false,
+      altKey: false,
+      preventDefault: jest.fn(),
+    };
+    fireEvent.keyDown(input, mockEvent);
+
+    // Assert
+    expect(screen.getByText(/All shortcuts have to be valid/)).toBeInTheDocument();
+  });
 });

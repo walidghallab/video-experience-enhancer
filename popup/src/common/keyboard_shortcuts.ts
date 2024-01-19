@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const DISABLED_KEYBOARD_SHORTCUT = "DISABLED";
-const INVALID_KEYBOARD_SHORTCUT = "INVALID";
+export const INVALID_KEYBOARD_SHORTCUT = "INVALID";
 
 export const KeyboardShortcutStorageKey = "keyboardShortcuts";
 

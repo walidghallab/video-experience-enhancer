@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useChromeContext } from "../contexts/ChromeContext";
-import { DEFAULT_SHORTCUTS } from "../common/keyboard_shortcuts";
+import { DEFAULT_SHORTCUTS, INVALID_KEYBOARD_SHORTCUT } from "../common/keyboard_shortcuts";
 import Loader from "./Loader";
 import { Box, Button } from "@mui/material";
 import KeyboardPressInput from "./KeyboardPressInput";
@@ -40,6 +40,23 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
   }
 
   const [nonUniqueError, setNonUniqueError] = useState(false);
+  const [invalidControlError, setInvalidControlError] = useState(false);
+
+  useEffect(() => {
+    if (chromeContext) {
+      setPlayPauseShortcut(chromeContext.keyboardShortcuts.playPause);
+      setForwardShortcut(chromeContext.keyboardShortcuts.forward);
+      setBackwardShortcut(chromeContext.keyboardShortcuts.backward);
+      setFullscreenShortcut(chromeContext.keyboardShortcuts.fullscreen);
+      setSubtitlesShortcut(chromeContext.keyboardShortcuts.subtitles);
+      setIncreasePlaybackRateShortcut(
+        chromeContext.keyboardShortcuts.increasePlaybackRate
+      );
+      setDecreasePlaybackRateShortcut(
+        chromeContext.keyboardShortcuts.decreasePlaybackRate
+      );
+    }
+  }, [chromeContext]);
 
   useEffect(() => {
     const shortcuts = [
@@ -53,6 +70,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
     ];
     const uniqueShortcuts = new Set(shortcuts);
     setNonUniqueError(shortcuts.length !== uniqueShortcuts.size);
+    setInvalidControlError(uniqueShortcuts.has(INVALID_KEYBOARD_SHORTCUT));
   }, [
     playPauseShortcut,
     forwardShortcut,
@@ -113,6 +131,19 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
             All shortcuts have to be unique
           </p>
         )}
+        {invalidControlError && (
+          <p
+            className="error"
+            style={{
+              width: "14em",
+              display: "inline-block",
+              marginTop: "-0.3em",
+              marginBottom: "0.5em",
+            }}
+          >
+            All shortcuts have to be valid
+          </p>
+        )}
         <div>
           <KeyboardPressInput
             value={playPauseShortcut!}
@@ -169,7 +200,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
             variant="contained"
             onClick={save}
             style={{ marginRight: "1em", width: "6.5em" }}
-            disabled={nonUniqueError}
+            disabled={nonUniqueError || invalidControlError}
           >
             Save
           </Button>
