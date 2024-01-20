@@ -15,44 +15,16 @@ export const WAITING_TIME_TO_SHOW_INVALID_ERROR = 1 * SECOND;
 function EditShortcuts(props: { finishedEditing: () => void }) {
   const chromeContext = useChromeContext();
 
-  const [playPauseShortcut, setPlayPauseShortcut] = useState(
-    chromeContext?.keyboardShortcuts.playPause
-  );
-  const [forwardShortcut, setForwardShortcut] = useState(
-    chromeContext?.keyboardShortcuts.forward
-  );
-  const [backwardShortcut, setBackwardShortcut] = useState(
-    chromeContext?.keyboardShortcuts.backward
-  );
-  const [fullscreenShortcut, setFullscreenShortcut] = useState(
-    chromeContext?.keyboardShortcuts.fullscreen
-  );
-  const [subtitlesShortcut, setSubtitlesShortcut] = useState(
-    chromeContext?.keyboardShortcuts.subtitles
-  );
-  const [increasePlaybackRateShortcut, setIncreasePlaybackRateShortcut] =
-    useState(chromeContext?.keyboardShortcuts.increasePlaybackRate);
-
-  const [decreasePlaybackRateShortcut, setDecreasePlaybackRateShortcut] =
-    useState(chromeContext?.keyboardShortcuts.decreasePlaybackRate);
-
-  const [downloadVideoShortcut, setDownloadVideoShortcut] = useState(
-    chromeContext?.keyboardShortcuts.downloadVideo
+  const [keyboardShortcuts, setKeyboardShortcuts] = useState<KeyboardShortcuts>(
+    chromeContext?.keyboardShortcuts || DEFAULT_SHORTCUTS
   );
 
-  function updateLocalState(shortcuts: KeyboardShortcuts) {
-    setPlayPauseShortcut(shortcuts.playPause);
-    setForwardShortcut(shortcuts.forward);
-    setBackwardShortcut(shortcuts.backward);
-    setFullscreenShortcut(shortcuts.fullscreen);
-    setSubtitlesShortcut(shortcuts.subtitles);
-    setIncreasePlaybackRateShortcut(shortcuts.increasePlaybackRate);
-    setDecreasePlaybackRateShortcut(shortcuts.decreasePlaybackRate);
-    setDownloadVideoShortcut(shortcuts.downloadVideo);
+  function updateLocalState(shortcuts: Partial<KeyboardShortcuts>) {
+    setKeyboardShortcuts({ ...keyboardShortcuts, ...shortcuts });
   }
 
   function reset() {
-    updateLocalState(DEFAULT_SHORTCUTS);
+    setKeyboardShortcuts({ ...DEFAULT_SHORTCUTS });
   }
 
   const [nonUniqueError, setNonUniqueError] = useState(false);
@@ -76,50 +48,23 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
 
   useEffect(() => {
     if (chromeContext) {
-      updateLocalState(chromeContext.keyboardShortcuts);
+      setKeyboardShortcuts({ ...chromeContext.keyboardShortcuts });
     }
   }, [chromeContext]);
 
   useEffect(() => {
-    const shortcuts = [
-      playPauseShortcut,
-      forwardShortcut,
-      backwardShortcut,
-      fullscreenShortcut,
-      subtitlesShortcut,
-      increasePlaybackRateShortcut,
-      decreasePlaybackRateShortcut,
-      downloadVideoShortcut,
-    ];
+    const shortcuts = [...Object.values(keyboardShortcuts)];
     const uniqueShortcuts = new Set(shortcuts);
     setNonUniqueError(shortcuts.length !== uniqueShortcuts.size);
     setInvalidControlError(uniqueShortcuts.has(INVALID_KEYBOARD_SHORTCUT));
-  }, [
-    playPauseShortcut,
-    forwardShortcut,
-    backwardShortcut,
-    fullscreenShortcut,
-    subtitlesShortcut,
-    increasePlaybackRateShortcut,
-    decreasePlaybackRateShortcut,
-    downloadVideoShortcut,
-  ]);
+  }, [keyboardShortcuts]);
 
   if (!chromeContext) {
     return <Loader />;
   }
 
   function save() {
-    chromeContext!.setKeyboardShortcuts({
-      playPause: playPauseShortcut!,
-      forward: forwardShortcut!,
-      backward: backwardShortcut!,
-      fullscreen: fullscreenShortcut!,
-      subtitles: subtitlesShortcut!,
-      increasePlaybackRate: increasePlaybackRateShortcut!,
-      decreasePlaybackRate: decreasePlaybackRateShortcut!,
-      downloadVideo: downloadVideoShortcut!,
-    });
+    chromeContext!.setKeyboardShortcuts({ ...keyboardShortcuts });
     props.finishedEditing();
   }
 
@@ -171,58 +116,58 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
         )}
         <div>
           <KeyboardPressInput
-            value={playPauseShortcut!}
-            setvalue={setPlayPauseShortcut}
+            value={keyboardShortcuts.playPause}
+            setvalue={(v) => updateLocalState({ playPause: v })}
             label="Play/Pause"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={forwardShortcut!}
-            setvalue={setForwardShortcut}
+            value={keyboardShortcuts.forward}
+            setvalue={(v) => updateLocalState({ forward: v })}
             label="Forward 5 seconds"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={backwardShortcut!}
-            setvalue={setBackwardShortcut}
+            value={keyboardShortcuts.backward}
+            setvalue={(v) => updateLocalState({ backward: v })}
             label="Backward 5 seconds"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={fullscreenShortcut!}
-            setvalue={setFullscreenShortcut}
+            value={keyboardShortcuts.fullscreen}
+            setvalue={(v) => updateLocalState({ fullscreen: v })}
             label="Enter/Exit Fullscreen"
           />
         </div>
         <div>
           <KeyboardPressInput
             id="toggle-english-subtitles"
-            value={subtitlesShortcut!}
-            setvalue={setSubtitlesShortcut}
+            value={keyboardShortcuts.subtitles}
+            setvalue={(v) => updateLocalState({ subtitles: v })}
             label="Show/Hide English subtitles"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={increasePlaybackRateShortcut!}
-            setvalue={setIncreasePlaybackRateShortcut}
+            value={keyboardShortcuts.increasePlaybackRate}
+            setvalue={(e) => updateLocalState({ increasePlaybackRate: e })}
             label="Increase playback rate by 0.5"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={decreasePlaybackRateShortcut!}
-            setvalue={setDecreasePlaybackRateShortcut}
+            value={keyboardShortcuts.decreasePlaybackRate}
+            setvalue={(e) => updateLocalState({ decreasePlaybackRate: e })}
             label="Decrease playback rate by 0.5"
           />
         </div>
         <div>
           <KeyboardPressInput
-            value={downloadVideoShortcut!}
-            setvalue={setDownloadVideoShortcut}
+            value={keyboardShortcuts.downloadVideo}
+            setvalue={(e) => updateLocalState({ downloadVideo: e })}
             label="Download video"
           />
         </div>

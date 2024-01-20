@@ -1,5 +1,7 @@
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import EditShortcuts, { WAITING_TIME_TO_SHOW_INVALID_ERROR } from "./EditShortcuts";
+import EditShortcuts, {
+  WAITING_TIME_TO_SHOW_INVALID_ERROR,
+} from "./EditShortcuts";
 import ChromeContextProvider, {
   useChromeContext,
 } from "../contexts/ChromeContext";
@@ -62,9 +64,12 @@ describe("EditShortcuts", () => {
           "Ctrl + E/e"
         )
       );
+      const input = await screen.findByLabelText(/Backward 5 seconds/);
+      await waitFor(() =>
+        expect(input.getAttribute("value")).toBe("Ctrl + E/e")
+      );
 
       // Act
-      const input = await screen.findByLabelText(/Backward 5 seconds/);
       const mockEvent = {
         key: "a",
         code: "KeyA",
@@ -120,7 +125,7 @@ describe("EditShortcuts", () => {
 
   it("shows error when a shortcut is not valid", async () => {
     // Arrange
-    jest.useFakeTimers()
+    jest.useFakeTimers();
     const mockValue = getMockValueForChromeContextProps();
     mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
     render(
@@ -152,6 +157,6 @@ describe("EditShortcuts", () => {
     await screen.findByText(/All shortcuts have to be valid/);
 
     // Cleanup
-    jest.useRealTimers()
+    jest.useRealTimers();
   });
 });
