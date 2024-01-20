@@ -13,6 +13,7 @@ const keyboardShortcutsSchema = z.object({
     subtitles: z.string(),
     increasePlaybackRate: z.string(),
     decreasePlaybackRate: z.string(), 
+    downloadVideo: z.string(),
 });
 export declare type KeyboardShortcuts = z.infer<typeof keyboardShortcutsSchema>;
 
@@ -25,6 +26,7 @@ export const DEFAULT_SHORTCUTS: KeyboardShortcuts = Object.freeze({
   subtitles: "C/c",
   increasePlaybackRate: "Ctrl + ArrowUp",
   decreasePlaybackRate: "Ctrl + ArrowDown",
+  downloadVideo: "Alt + Shift + D/d",
 });
 
 function checkValueExists(

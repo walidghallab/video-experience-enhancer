@@ -36,6 +36,10 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
   const [decreasePlaybackRateShortcut, setDecreasePlaybackRateShortcut] =
     useState(chromeContext?.keyboardShortcuts.decreasePlaybackRate);
 
+  const [downloadVideoShortcut, setDownloadVideoShortcut] = useState(
+    chromeContext?.keyboardShortcuts.downloadVideo
+  );
+
   function updateLocalState(shortcuts: KeyboardShortcuts) {
     setPlayPauseShortcut(shortcuts.playPause);
     setForwardShortcut(shortcuts.forward);
@@ -44,6 +48,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
     setSubtitlesShortcut(shortcuts.subtitles);
     setIncreasePlaybackRateShortcut(shortcuts.increasePlaybackRate);
     setDecreasePlaybackRateShortcut(shortcuts.decreasePlaybackRate);
+    setDownloadVideoShortcut(shortcuts.downloadVideo);
   }
 
   function reset() {
@@ -84,6 +89,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
       subtitlesShortcut,
       increasePlaybackRateShortcut,
       decreasePlaybackRateShortcut,
+      downloadVideoShortcut,
     ];
     const uniqueShortcuts = new Set(shortcuts);
     setNonUniqueError(shortcuts.length !== uniqueShortcuts.size);
@@ -96,6 +102,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
     subtitlesShortcut,
     increasePlaybackRateShortcut,
     decreasePlaybackRateShortcut,
+    downloadVideoShortcut,
   ]);
 
   if (!chromeContext) {
@@ -111,6 +118,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
       subtitles: subtitlesShortcut!,
       increasePlaybackRate: increasePlaybackRateShortcut!,
       decreasePlaybackRate: decreasePlaybackRateShortcut!,
+      downloadVideo: downloadVideoShortcut!,
     });
     props.finishedEditing();
   }
@@ -209,6 +217,13 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
             value={decreasePlaybackRateShortcut!}
             setvalue={setDecreasePlaybackRateShortcut}
             label="Decrease playback rate by 0.5"
+          />
+        </div>
+        <div>
+          <KeyboardPressInput
+            value={downloadVideoShortcut!}
+            setvalue={setDownloadVideoShortcut}
+            label="Download video"
           />
         </div>
         <div>

@@ -53,3 +53,27 @@ export function executeKeyboardEventListener(
     }
   );
 }
+
+export function downloadVideo(url: string, filename: string) {
+  filename = filename || "video";
+  if (!url) {
+    console.error("No video URL");
+    return;
+  }
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    console.error(
+      `Url ${url} is not supported for download in 'Video experience enhancer' Chrome extension.`
+    );
+    return;
+  }
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+    })
+    .catch((err) => console.error(err));
+}

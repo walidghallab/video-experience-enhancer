@@ -1,5 +1,5 @@
 import { keyboardEventToString } from "../popup/src/common/keyboard_shortcuts";
-import { LiveProxyStorage, executeKeyboardEventListener } from "./utils";
+import { LiveProxyStorage, downloadVideo, executeKeyboardEventListener } from "./utils";
 
 executeKeyboardEventListener(handleKeyDown);
 
@@ -28,6 +28,10 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         if (video.playbackRate > 0.5) {
           video.playbackRate -= 0.5;
         }
+        e.preventDefault();
+        break;
+      case keyboardShortcuts.downloadVideo:
+        downloadVideo(video.src, document.title);
         e.preventDefault();
         break;
     }

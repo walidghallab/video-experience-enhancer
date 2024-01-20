@@ -90,6 +90,7 @@ describe("ChromeContextProvider", () => {
         subtitles: "Alt + C/c",
         increasePlaybackRate: "Alt + ArrowUp",
         decreasePlaybackRate: "Alt + ArrowDown",
+        downloadVideo: "Alt + D/d",
       });
     });
     await screen.findByText(/"playPause":"Alt \+ Space"/);
@@ -99,5 +100,6 @@ describe("ChromeContextProvider", () => {
     await screen.findByText(/"subtitles":"Alt \+ C\/c"/);
     await screen.findByText(/"increasePlaybackRate":"Alt \+ ArrowUp"/);
     await screen.findByText(/"decreasePlaybackRate":"Alt \+ ArrowDown"/);
+    await screen.findByText(/"downloadVideo":"Alt \+ D\/d"/);
   });
 });
