@@ -65,3 +65,22 @@ cd ../popup && npm i && cd -
 exit_with_error_if_last_command_failed "Failed to update popup package-lock.json"
 
 print_success 'All versions have been updated successfully'
+
+# Args: $1: message
+function scanYn () {
+    while true; do
+        read -p "$1 (Y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ || $REPLY == "" ]]; then
+            return 0
+        elif [[ $REPLY =~ ^[Nn]$ ]]; then
+            return 1
+        fi
+    done
+}
+
+if scanYn "Do you want to commit the changes?"; then
+    git add ../src/manifest.json ../content-scripts/package.json ../content-scripts/package-lock.json ../integration-tests/package.json ../integration-tests/package-lock.json ../popup/package.json ../popup/package-lock.json
+    git commit -m "Update the version to $NEW_VERSION"
+    print_success 'All changes have been committed successfully'
+fi
