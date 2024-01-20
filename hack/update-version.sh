@@ -15,10 +15,8 @@ function print_success() {
     echo >&2 -e "${GREEN}SUCCESS: $1${NC}"
 }
 
-if [[ ! $PWD == *hack ]]; then
-    print_error 'You must run this script from the hack directory'
-    exit 1
-fi
+PARENT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$PARENT_PATH"
 
 if [[ $NEW_VERSION == "" ]]; then
     print_error 'You must specify the new version as the first argument'
