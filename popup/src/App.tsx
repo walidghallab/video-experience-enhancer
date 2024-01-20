@@ -93,6 +93,7 @@ function FullySupportedUrl() {
 
 /** PartiallySupportedWebsite gets displayed when the current url is a website with partial support. */
 function PartiallySupportedWebsite() {
+  const shortcuts = useChromeContext()?.keyboardShortcuts;
   return (
     <div>
       <div className="margin-around-medium">
@@ -103,11 +104,11 @@ function PartiallySupportedWebsite() {
       <table className="popup">
         <tbody>
           <tr>
-            <td>Ctrl + Up</td>
+            <TdForShortcutKey shortcutKey={shortcuts?.increasePlaybackRate} />
             <td>Increase playback rate by 0.5</td>
           </tr>
           <tr>
-            <td>Ctrl + Down</td>
+            <TdForShortcutKey shortcutKey={shortcuts?.decreasePlaybackRate} />
             <td>Decrease playback rate by 0.5</td>
           </tr>
         </tbody>
