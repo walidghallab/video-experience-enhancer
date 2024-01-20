@@ -50,7 +50,7 @@ content-scripts/.installed.mkf: content-scripts/package.json
 
 build-content-scripts: content-scripts/.built.mkf
 
-content-scripts/.built.mkf: $(shell find ./content-scripts -type f -not -ipath "*/node_modules*" -not -path "./content-scripts/.built.mkf -not -iregex ".*\.test.tsx?"") $(shell find ./popup/src/common -type f -not -iregex ".*\.test.tsx?")
+content-scripts/.built.mkf: $(shell find ./content-scripts -type f -not -ipath "*/node_modules*" -not -path "./content-scripts/.built.mkf" -not -iregex ".*\.test.tsx?") $(shell find ./popup/src/common -type f -not -iregex ".*\.test.tsx?")
 	@make install-content-scripts
 	@echo "Building Content Scripts"
 	@cd ./content-scripts && npm run build
