@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { useChromeContext } from "../contexts/ChromeContext";
-import { DEFAULT_SHORTCUTS, INVALID_KEYBOARD_SHORTCUT } from "../common/keyboard_shortcuts";
+import {
+  DEFAULT_SHORTCUTS,
+  INVALID_KEYBOARD_SHORTCUT,
+} from "../common/keyboard_shortcuts";
 import Loader from "./Loader";
 import { Box, Button } from "@mui/material";
 import KeyboardPressInput from "./KeyboardPressInput";
+
+const SECOND = 1000;
+export const WAITING_TIME_TO_SHOW_INVALID_ERROR = 1 * SECOND;
 
 function EditShortcuts(props: { finishedEditing: () => void }) {
   const chromeContext = useChromeContext();
@@ -41,6 +47,22 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
 
   const [nonUniqueError, setNonUniqueError] = useState(false);
   const [invalidControlError, setInvalidControlError] = useState(false);
+
+  // We delay showing invalid control error to avoid showing it when the user is still typing
+  const [showInvalidControlError, setShowInvalidControlError] = useState(false);
+
+  useEffect(() => {
+    // When it is invalid, we show the error after 1 second, otherwise we update it immediately.
+    if (invalidControlError) {
+      const timeout = setTimeout(
+        () => setShowInvalidControlError(invalidControlError), // We use most recent value of invalidControlError in case it has changed.
+        WAITING_TIME_TO_SHOW_INVALID_ERROR
+      );
+      return () => clearTimeout(timeout);
+    } else {
+      setShowInvalidControlError(false);
+    }
+  }, [invalidControlError]);
 
   useEffect(() => {
     if (chromeContext) {
@@ -131,7 +153,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
             All shortcuts have to be unique
           </p>
         )}
-        {invalidControlError && (
+        {showInvalidControlError && (
           <p
             className="error"
             style={{
