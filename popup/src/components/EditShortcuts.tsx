@@ -3,6 +3,7 @@ import { useChromeContext } from "../contexts/ChromeContext";
 import {
   DEFAULT_SHORTCUTS,
   INVALID_KEYBOARD_SHORTCUT,
+  KeyboardShortcuts,
 } from "../common/keyboard_shortcuts";
 import Loader from "./Loader";
 import { Box, Button } from "@mui/material";
@@ -35,14 +36,18 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
   const [decreasePlaybackRateShortcut, setDecreasePlaybackRateShortcut] =
     useState(chromeContext?.keyboardShortcuts.decreasePlaybackRate);
 
+  function updateLocalState(shortcuts: KeyboardShortcuts) {
+    setPlayPauseShortcut(shortcuts.playPause);
+    setForwardShortcut(shortcuts.forward);
+    setBackwardShortcut(shortcuts.backward);
+    setFullscreenShortcut(shortcuts.fullscreen);
+    setSubtitlesShortcut(shortcuts.subtitles);
+    setIncreasePlaybackRateShortcut(shortcuts.increasePlaybackRate);
+    setDecreasePlaybackRateShortcut(shortcuts.decreasePlaybackRate);
+  }
+
   function reset() {
-    setPlayPauseShortcut(DEFAULT_SHORTCUTS.playPause);
-    setForwardShortcut(DEFAULT_SHORTCUTS.forward);
-    setBackwardShortcut(DEFAULT_SHORTCUTS.backward);
-    setFullscreenShortcut(DEFAULT_SHORTCUTS.fullscreen);
-    setSubtitlesShortcut(DEFAULT_SHORTCUTS.subtitles);
-    setIncreasePlaybackRateShortcut(DEFAULT_SHORTCUTS.increasePlaybackRate);
-    setDecreasePlaybackRateShortcut(DEFAULT_SHORTCUTS.decreasePlaybackRate);
+    updateLocalState(DEFAULT_SHORTCUTS);
   }
 
   const [nonUniqueError, setNonUniqueError] = useState(false);
@@ -66,17 +71,7 @@ function EditShortcuts(props: { finishedEditing: () => void }) {
 
   useEffect(() => {
     if (chromeContext) {
-      setPlayPauseShortcut(chromeContext.keyboardShortcuts.playPause);
-      setForwardShortcut(chromeContext.keyboardShortcuts.forward);
-      setBackwardShortcut(chromeContext.keyboardShortcuts.backward);
-      setFullscreenShortcut(chromeContext.keyboardShortcuts.fullscreen);
-      setSubtitlesShortcut(chromeContext.keyboardShortcuts.subtitles);
-      setIncreasePlaybackRateShortcut(
-        chromeContext.keyboardShortcuts.increasePlaybackRate
-      );
-      setDecreasePlaybackRateShortcut(
-        chromeContext.keyboardShortcuts.decreasePlaybackRate
-      );
+      updateLocalState(chromeContext.keyboardShortcuts);
     }
   }, [chromeContext]);
 
