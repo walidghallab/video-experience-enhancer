@@ -70,7 +70,7 @@ describe("keyboardEventToString method", () => {
         metaKey: false,
         key: "",
       },
-      expected: "INVALID",
+      expected: "",
     },
   ])("returns the appropriate string for $name", ({ event, expected }) => {
     expect(keyboardEventToString(event)).toBe(expected);
