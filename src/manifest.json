@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Video experience enhancer",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "This Chrome extension provides additional functionality for video players played in the web.",
   "permissions": ["activeTab", "storage"],
   "homepage_url": "https://github.com/walidghallab/video-experience-enhancer",
