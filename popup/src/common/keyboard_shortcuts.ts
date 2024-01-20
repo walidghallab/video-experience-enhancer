@@ -63,51 +63,60 @@ export function keyboardShortcutsFromUnknown(unparsedKeyboardShortcuts: unknown)
 }
 
 export declare interface KeyboardPress {
-  Ctrl: boolean;
-  Shift: boolean;
-  Alt: boolean;
-  Meta: boolean;
-  Key: string;
+  ctrl: boolean;
+  shift: boolean;
+  alt: boolean;
+  meta: boolean;
+  key: string;
 }
 
 function keyboardPresstoString(pressed: KeyboardPress): string {
-  if (pressed.Key === " ") {
-    pressed.Key = "Space";
+  // Needed to make the format of the event.code compatible with event.key.
+  if (pressed.key.length === 4 && pressed.key.startsWith("Key")) {
+    pressed.key = pressed.key[3];
   }
-
-  if (pressed.Key.length === 1) {
-    pressed.Key = `${pressed.Key.toUpperCase()}/${pressed.Key.toLowerCase()}`;
+  if (pressed.key === " ") {
+    pressed.key = "Space";
   }
-
-  let final = "";
-  final += pressed.Ctrl ? "Ctrl + " : "";
-  final += pressed.Alt ? "Alt + " : "";
-  final += pressed.Meta ? "Meta + " : "";
-  final += pressed.Shift ? "Shift + " : "";
-  final += pressed.Key;
-  return final;
-}
-
-type KeyboardEventPartial = Pick<KeyboardEvent, "ctrlKey" | "shiftKey" | "altKey" | "metaKey" | "key">;
-
-export function keyboardEventToString(e: KeyboardEventPartial): string {
-  const pressed = {
-    Ctrl: e.ctrlKey,
-    Shift: e.shiftKey,
-    Alt: e.altKey,
-    Meta: e.metaKey,
-    Key: e.key,
-  };
 
   if (
-    pressed.Key.length !== 1 &&
-    !pressed.Key.startsWith("Arrow") &&
-    !pressed.Key.startsWith("Page") &&
-    pressed.Key !== "Home" &&
-    pressed.Key !== "End"
+    pressed.key.length !== 1 &&
+    !pressed.key.startsWith("Arrow") &&
+    !pressed.key.startsWith("Page") &&
+    pressed.key !== "Home" &&
+    pressed.key !== "End" &&
+    pressed.key !== "Space"
   ) {
     return INVALID_KEYBOARD_SHORTCUT;
   }
+
+  if (pressed.key === " ") {
+    pressed.key = "Space";
+  }
+
+  if (pressed.key.length === 1) {
+    pressed.key = `${pressed.key.toUpperCase()}/${pressed.key.toLowerCase()}`;
+  }
+
+  let final = "";
+  final += pressed.ctrl ? "Ctrl + " : "";
+  final += pressed.alt ? "Alt + " : "";
+  final += pressed.meta ? "Meta + " : "";
+  final += pressed.shift ? "Shift + " : "";
+  final += pressed.key;
+  return final;
+}
+
+type KeyboardEventPartial = Pick<KeyboardEvent, "ctrlKey" | "shiftKey" | "altKey" | "metaKey" | "code">;
+
+export function keyboardEventToString(e: KeyboardEventPartial): string {
+  const pressed: KeyboardPress = {
+    ctrl: e.ctrlKey,
+    shift: e.shiftKey,
+    alt: e.altKey,
+    meta: e.metaKey,
+    key: e.code,
+  };
 
   return keyboardPresstoString(pressed);
 }
