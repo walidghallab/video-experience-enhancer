@@ -59,7 +59,7 @@ describe("keyboardEventToString method", () => {
         metaKey: true,
         key: "a",
       },
-      expected: "Ctrl + Shift + Alt + Meta + A/a",
+      expected: "Ctrl + Alt + Meta + Shift + A/a",
     },
     {
       name: "not pressing any key",

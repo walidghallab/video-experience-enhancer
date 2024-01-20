@@ -61,7 +61,6 @@ export function keyboardShortcutsFromUnknown(unparsedKeyboardShortcuts: unknown)
 }
 
 export declare interface KeyboardPress {
-  // Order is important as it is used in storing its value as string, and 'Key' should be the last one.
   Ctrl: boolean;
   Shift: boolean;
   Alt: boolean;
@@ -79,13 +78,11 @@ function keyboardPresstoString(pressed: KeyboardPress): string {
   }
 
   let final = "";
-  for (const [k, v] of Object.entries(pressed)) {
-    if (typeof v === "boolean" && v) {
-      final += k + " + ";
-    } else if (typeof v === "string") {
-      final += v;
-    }
-  }
+  final += pressed.Ctrl ? "Ctrl + " : "";
+  final += pressed.Alt ? "Alt + " : "";
+  final += pressed.Meta ? "Meta + " : "";
+  final += pressed.Shift ? "Shift + " : "";
+  final += pressed.Key;
   return final;
 }
 
