@@ -90,10 +90,17 @@ table.popup {
 }
 
 .popup tr {
-  height: 2em;
+  height: 2.5em;
 }
 
 .popup tr:hover {
   background-color: blue;
   color: white;
+}
+
+.popup td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }
