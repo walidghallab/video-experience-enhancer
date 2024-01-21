@@ -55,9 +55,9 @@ Note that if you install it this way, it will get automatically removed every ti
   - `make build-content-scripts`: Builds only code inside `/content-scripts` directory into production optimized code that exist in `/src/content-scripts` directory.
   - `make test`: Runs all tests (including both unit tests and integration tests) in the project.
   - `make integration-tests`: Runs only integration tests in the project.
-  - `make unit-tests`: Runs only unit tests in the project. A few notes if you are developing inside `/popup` directory:
-    - You can run `npm test` from there to run tests with --watch 
-    - You can debug them using `npm run test:debug`, instructions are [here](https://create-react-app.dev/docs/debugging-tests/).
+  - `make unit-tests`: Runs only unit tests in the project. A few notes if you are developing inside `/popup` or `/content-scripts` directories:
+    - You can run `npm test` from there to run tests with --watch
+    - You can debug them using `npm run test:debug` (works only inside `popup`), instructions are [here](https://create-react-app.dev/docs/debugging-tests/).
     - You can print test coverage report using `npm run test:coverage`
 
 ## Code Style
