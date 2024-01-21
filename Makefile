@@ -38,8 +38,10 @@ integration-test:
 	
 unit-test:
 	@make install-popup
+	@make install-content-scripts
 	@echo "Running Unit Tests"
-	@cd ./popup && npm run test:without-watch
+	@cd ./popup && npm run test:no-watch
+	@cd ./content-scripts && npm run test:no-watch
 
 install-content-scripts: content-scripts/.installed.mkf
 	

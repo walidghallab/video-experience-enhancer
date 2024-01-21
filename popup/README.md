@@ -29,7 +29,7 @@ Command used for debugging. You can use it with Chrome or with VS Code. Instruct
 
 Command used for printing test coverage report.
 
-### `npm run test:without-watch`
+### `npm run test:no-watch`
 
 Command used for running all the tests without watch mode. Used from automated scripts and CI.
 

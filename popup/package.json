@@ -27,7 +27,7 @@
     "build": "./build-react.sh",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "test:without-watch": "react-scripts test --watchAll=false",
+    "test:no-watch": "react-scripts test --watchAll=false",
     "test:coverage": "react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
