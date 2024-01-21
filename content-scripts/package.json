@@ -1,6 +1,6 @@
 {
   "name": "video-experience-enhancer-content-scripts",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "description": "Content scripts for video experience enhancer Chrome extension",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
