@@ -1,7 +1,9 @@
 import { keyboardEventToString } from "../popup/src/common/keyboard_shortcuts";
-import { LiveProxyStorage, downloadVideo, executeKeyboardEventListener } from "./utils";
+import { LiveProxyStorage, downloadVideo, executeKeyboardEventListener, insertSnackbar, showSnackbar } from "./utils";
 
 executeKeyboardEventListener(handleKeyDown);
+
+insertSnackbar();
 
 function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
   const video = document.querySelector("video");
@@ -22,12 +24,14 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         if (video.playbackRate < 16) {
           video.playbackRate += 0.5;
         }
+        showSnackbar(`Set playback rate to ${video.playbackRate}x`);
         e.preventDefault();
         break;
       case keyboardShortcuts.decreasePlaybackRate:
         if (video.playbackRate > 0.5) {
           video.playbackRate -= 0.5;
         }
+        showSnackbar(`Set playback rate to ${video.playbackRate}x`);
         e.preventDefault();
         break;
       case keyboardShortcuts.downloadVideo:

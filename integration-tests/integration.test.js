@@ -276,6 +276,9 @@ describe("Video experience enhancer", function () {
     logInfo("Testing playback increased by 1.5.");
     expect(await video.getProperty("playbackRate")).to.equal(2.5);
 
+    logInfo("Testing snackbar to be visible and showing correct value.");
+    await driver.findElement(By.xpath("//*[text()='Set playback rate to 2.5x']"));
+
     logInfo("Decreasing playback rate (2 times).");
     await driver
       .actions()

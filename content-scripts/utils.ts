@@ -64,8 +64,10 @@ export function downloadVideo(url: string, filename: string) {
     console.error(
       `Url ${url} is not supported for download in 'Video experience enhancer' Chrome extension.`
     );
+    showSnackbar("Can't download the video on this page");
     return;
   }
+  showSnackbar("Downloading video...");
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
