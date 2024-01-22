@@ -25,10 +25,10 @@ Once the extension is installed, you can use it by following these steps:
 | Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls                                                      |
 | Alt + Shift + D/d         | Download video                      | Most http & https urls (not including Youtube, Netflix, HBO & some others) |
 | C or c                    | Show/Hide English subtitles         | coursera.org                                                               |
+| F or f                    | Enter/Exit full-screen mode         | coursera.org                                                               |
 | Space                     | Play/Pause video                    | coursera.org                                                               |
 | Arrow Left                | Seek video backward 5 seconds       | coursera.org                                                               |
 | Arrow Right               | Seek video forward 5 seconds        | coursera.org                                                               |
-| F or f                    | Exit full-screen mode               | coursera.org                                                               |
 
 **Extra functionality:**
 
