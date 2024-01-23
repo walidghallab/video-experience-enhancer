@@ -57,8 +57,6 @@ exit_with_error_if_last_command_failed "Failed to build popup"
 
 echo "$SOURCE_FILE_CONTENT" >$SOURCE_FILE
 
-sed -i 's/src="\//src="/g' $BUILD_PATH/index.html &&
-sed -i 's/href="\//href="/g' $BUILD_PATH/index.html &&
 sed -i 's/<link rel="manifest" href="manifest.json"\/>//' $BUILD_PATH/index.html &&
 rm $BUILD_PATH/manifest.json
 exit_with_error_if_last_command_failed "Failed to adjust react built files to work as chrome extension"
