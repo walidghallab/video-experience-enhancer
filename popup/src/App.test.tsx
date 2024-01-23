@@ -21,13 +21,13 @@ describe.each([
   ["partially websites", PARTIALLY_SUPPORTED_WEBSITE],
   ["unsupported websites", UNSUPPORTED_WEBSITE],
 ])("for %s", (name, mockValue) => {
-  it("renders welcome text", async () => {
+  it("renders header text", async () => {
     render(
       <ChromeContextProvider mockValue={mockValue}>
         <App />
       </ChromeContextProvider>
     );
-    await screen.findByText(/Welcome to video experience enhancer/i);
+    await screen.findByText(/Video experience enhancer/i);
   });
 
   it("renders filing request text", async () => {

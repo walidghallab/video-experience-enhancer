@@ -49,7 +49,7 @@ describe("Video experience enhancer", function () {
     logInfo("Opening the extension popup");
     await driver.get(`chrome-extension://${EXTENSION_ID}/popup/index.html`);
     const headerText = await driver.findElement(By.css("h1")).getText();
-    expect(headerText).to.equal("Welcome to video experience enhancer");
+    expect(headerText.toLowerCase()).to.equal("video experience enhancer");
   });
 
   it("edits keyboard shortcuts correctly", async function () {

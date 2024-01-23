@@ -7,13 +7,19 @@ import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { DISABLED_KEYBOARD_SHORTCUT } from "./common/keyboard_shortcuts";
 import EditShortcuts from "./components/EditShortcuts";
+import logo from "./assets/logo.svg";
 
 const supportedUrlsRegex = ["https://(.*.)?coursera.org/.*"].map(
   (url) => new RegExp(url)
 );
 
 function HeaderTitle() {
-  return <h1>Welcome to video experience enhancer</h1>;
+  return (
+    <div className="container">
+      <img src={logo} height="80px" alt="Logo" />
+      <h1 className="app-header">Video experience enhancer</h1>
+    </div>
+  );
 }
 
 function FilingRequest() {
