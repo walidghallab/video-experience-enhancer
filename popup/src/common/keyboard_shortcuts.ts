@@ -6,27 +6,26 @@ export const INVALID_KEYBOARD_SHORTCUT = "";
 export const KeyboardShortcutStorageKey = "keyboardShortcuts";
 
 const keyboardShortcutsSchema = z.object({
-    playPause: z.string(),
-    forward: z.string(),
-    backward: z.string(),
-    fullscreen: z.string(),
-    subtitles: z.string(),
-    increasePlaybackRate: z.string(),
-    decreasePlaybackRate: z.string(), 
-    downloadVideo: z.string(),
+  playPause: z.string(),
+  forward: z.string(),
+  backward: z.string(),
+  fullscreen: z.string(),
+  subtitles: z.string(),
+  increasePlaybackRate: z.string(),
+  decreasePlaybackRate: z.string(),
+  downloadVideo: z.string(),
 });
 export declare type KeyboardShortcuts = z.infer<typeof keyboardShortcutsSchema>;
-
 
 export const DEFAULT_SHORTCUTS: KeyboardShortcuts = Object.freeze({
   playPause: "Space",
   forward: "ArrowRight",
   backward: "ArrowLeft",
-  fullscreen: "F/f",
-  subtitles: "C/c",
+  fullscreen: "F",
+  subtitles: "C",
   increasePlaybackRate: "Ctrl + ArrowUp",
   decreasePlaybackRate: "Ctrl + ArrowDown",
-  downloadVideo: "Alt + Shift + D/d",
+  downloadVideo: "Alt + Shift + D",
 });
 
 function checkValueExists(
@@ -36,18 +35,26 @@ function checkValueExists(
   return Object.values(object).some((v) => v === value);
 }
 
-export function keyboardShortcutsFromUnknown(unparsedKeyboardShortcuts: unknown): KeyboardShortcuts {
+// Normalize handle backward compatibility with old shortcuts.
+function normalizeShortcut(shortcut: string): string {
+  // Previously characters were shown and stored as 'A/a' instead of 'A'.
+  return shortcut.replace(/([A-Z])\/[a-z]/g, "$1");
+}
+
+export function keyboardShortcutsFromUnknown(
+  unparsedKeyboardShortcuts: unknown
+): KeyboardShortcuts {
   if (!unparsedKeyboardShortcuts) {
     return DEFAULT_SHORTCUTS;
   }
-  const parsedKeyboardShortcuts = keyboardShortcutsSchema.partial().parse(unparsedKeyboardShortcuts);
+  const parsedKeyboardShortcuts = keyboardShortcutsSchema
+    .partial()
+    .parse(unparsedKeyboardShortcuts);
   let shortcuts: Partial<KeyboardShortcuts> = {};
   for (const [k, v] of Object.entries(DEFAULT_SHORTCUTS) as Array<
     [keyof KeyboardShortcuts, string]
   >) {
-    if (
-      parsedKeyboardShortcuts[k]
-    ) {
+    if (parsedKeyboardShortcuts[k]) {
       shortcuts[k] = parsedKeyboardShortcuts[k];
     } else {
       // If the shortcut is not set (can happen when we add a new shortcut after the user has already set their own shortcuts),
@@ -58,6 +65,8 @@ export function keyboardShortcutsFromUnknown(unparsedKeyboardShortcuts: unknown)
         shortcuts[k] = v;
       }
     }
+
+    shortcuts[k] = normalizeShortcut(shortcuts[k]!);
   }
   return shortcuts as KeyboardShortcuts;
 }
@@ -74,6 +83,9 @@ function keyboardPresstoString(pressed: KeyboardPress): string {
   // Needed to make the format of the event.code compatible with event.key.
   if (pressed.key.length === 4 && pressed.key.startsWith("Key")) {
     pressed.key = pressed.key[3];
+  }
+  if (pressed.key.length === 1) {
+    pressed.key = pressed.key.toUpperCase();
   }
   if (pressed.key === " ") {
     pressed.key = "Space";
@@ -94,10 +106,6 @@ function keyboardPresstoString(pressed: KeyboardPress): string {
     pressed.key = "Space";
   }
 
-  if (pressed.key.length === 1) {
-    pressed.key = `${pressed.key.toUpperCase()}/${pressed.key.toLowerCase()}`;
-  }
-
   let final = "";
   final += pressed.ctrl ? "Ctrl + " : "";
   final += pressed.alt ? "Alt + " : "";
@@ -107,7 +115,10 @@ function keyboardPresstoString(pressed: KeyboardPress): string {
   return final;
 }
 
-type KeyboardEventPartial = Pick<KeyboardEvent, "ctrlKey" | "shiftKey" | "altKey" | "metaKey" | "code">;
+type KeyboardEventPartial = Pick<
+  KeyboardEvent,
+  "ctrlKey" | "shiftKey" | "altKey" | "metaKey" | "code"
+>;
 
 export function keyboardEventToString(e: KeyboardEventPartial): string {
   const pressed: KeyboardPress = {
@@ -120,3 +131,7 @@ export function keyboardEventToString(e: KeyboardEventPartial): string {
 
   return keyboardPresstoString(pressed);
 }
+
+export const exportedForTesting = {
+  normalizeShortcut,
+};

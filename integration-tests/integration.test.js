@@ -59,7 +59,7 @@ describe("Video experience enhancer", function () {
     logInfo('Clicking on "Edit keyboard shortcuts"');
     await driver.findElement(By.css("#edit-shortcuts")).click();
 
-    logInfo('Change the shortcut for "Toggle English subtitles" to Ctrl + E/e');
+    logInfo('Change the shortcut for "Toggle English subtitles" to Ctrl + E');
     await driver.findElement(By.css("#toggle-english-subtitles")).click();
     await driver
       .actions()
@@ -70,7 +70,7 @@ describe("Video experience enhancer", function () {
     const actualKeyValue = await driver
       .findElement(By.css("#toggle-english-subtitles"))
       .getAttribute("value");
-    const expectedKeyValue = "Ctrl + E/e";
+    const expectedKeyValue = "Ctrl + E";
     expect(actualKeyValue).to.equal(expectedKeyValue);
 
     logInfo("Saving the shortcut changes");

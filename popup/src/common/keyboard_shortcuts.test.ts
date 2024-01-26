@@ -1,10 +1,11 @@
 import {
   DEFAULT_SHORTCUTS,
+  exportedForTesting,
   keyboardEventToString,
   keyboardShortcutsFromUnknown,
 } from "./keyboard_shortcuts";
 
-describe("keyboardEventToString method", () => {
+describe("keyboardEventToString function", () => {
   it.each([
     {
       name: "pressing 'a'",
@@ -15,7 +16,7 @@ describe("keyboardEventToString method", () => {
         metaKey: false,
         code: "a",
       },
-      expected: "A/a",
+      expected: "A",
     },
     {
       name: "pressing 'A'",
@@ -26,7 +27,7 @@ describe("keyboardEventToString method", () => {
         metaKey: false,
         code: "A",
       },
-      expected: "A/a",
+      expected: "A",
     },
     {
       name: "pressing 'a' with Ctrl",
@@ -37,7 +38,7 @@ describe("keyboardEventToString method", () => {
         metaKey: false,
         code: "a",
       },
-      expected: "Ctrl + A/a",
+      expected: "Ctrl + A",
     },
     {
       name: "pressing 'a' with Ctrl and Alt",
@@ -48,7 +49,7 @@ describe("keyboardEventToString method", () => {
         metaKey: false,
         code: "a",
       },
-      expected: "Ctrl + Alt + A/a",
+      expected: "Ctrl + Alt + A",
     },
     {
       name: "pressing 'a' with all modifiers",
@@ -59,7 +60,7 @@ describe("keyboardEventToString method", () => {
         metaKey: true,
         code: "a",
       },
-      expected: "Ctrl + Alt + Meta + Shift + A/a",
+      expected: "Ctrl + Alt + Meta + Shift + A",
     },
     {
       name: "not pressing any key",
@@ -77,7 +78,7 @@ describe("keyboardEventToString method", () => {
   });
 });
 
-describe("keyboardShortcutsFromUnknown method", () => {
+describe("keyboardShortcutsFromUnknown function", () => {
   it.each([
     {
       description: "returns the default shortcuts when given an empty object",
@@ -98,21 +99,21 @@ describe("keyboardShortcutsFromUnknown method", () => {
         playPause: "Alt + Space",
         forward: "Alt + ArrowRight",
         backward: "Alt + ArrowLeft",
-        fullscreen: "Alt + F/f",
-        subtitles: "Alt + C/c",
+        fullscreen: "Alt + F",
+        subtitles: "Alt + C",
         increasePlaybackRate: "Alt + ArrowUp",
         decreasePlaybackRate: "Alt +  ArrowDown",
-        downloadVideo: "Ctrl + Shift + D/d",
+        downloadVideo: "Ctrl + Shift + D",
       },
       expected: {
         playPause: "Alt + Space",
         forward: "Alt + ArrowRight",
         backward: "Alt + ArrowLeft",
-        fullscreen: "Alt + F/f",
-        subtitles: "Alt + C/c",
+        fullscreen: "Alt + F",
+        subtitles: "Alt + C",
         increasePlaybackRate: "Alt + ArrowUp",
         decreasePlaybackRate: "Alt +  ArrowDown",
-        downloadVideo: "Ctrl + Shift + D/d",
+        downloadVideo: "Ctrl + Shift + D",
       },
       expectedToThrow: false,
     },
@@ -128,11 +129,11 @@ describe("keyboardShortcutsFromUnknown method", () => {
         playPause: "Alt + Space",
         forward: "Alt + ArrowRight",
         backward: "ArrowLeft",
-        fullscreen: "F/f",
-        subtitles: "C/c",
+        fullscreen: "F",
+        subtitles: "C",
         increasePlaybackRate: "Ctrl + ArrowUp",
         decreasePlaybackRate: "Alt +  ArrowDown",
-        downloadVideo: "Alt + Shift + D/d",
+        downloadVideo: "Alt + Shift + D",
       },
       expectedToThrow: false,
     },
@@ -149,11 +150,11 @@ describe("keyboardShortcutsFromUnknown method", () => {
         playPause: "Alt + Space",
         forward: "Alt + ArrowRight",
         backward: "ArrowLeft",
-        fullscreen: "F/f",
-        subtitles: "C/c",
+        fullscreen: "F",
+        subtitles: "C",
         increasePlaybackRate: "Ctrl + ArrowUp",
         decreasePlaybackRate: "Alt +  ArrowDown",
-        downloadVideo: "Alt + Shift + D/d",
+        downloadVideo: "Alt + Shift + D",
       },
       expectedToThrow: false,
     },
@@ -174,5 +175,15 @@ describe("keyboardShortcutsFromUnknown method", () => {
       // eslint-disable-next-line jest/no-conditional-expect
       expect(keyboardShortcutsFromUnknown(input)).toEqual(expected);
     }
+  });
+});
+
+describe ("normalizeShortcut function", () => {
+  it ("returns the correct value when given a valid shortcut", () => {
+    expect(exportedForTesting.normalizeShortcut("Ctrl + A")).toBe("Ctrl + A");
+  });
+
+  it ("returns the correct value when given a shortcut stored in old way", () => {
+    expect(exportedForTesting.normalizeShortcut("Ctrl + A/a")).toBe("Ctrl + A");
   });
 });

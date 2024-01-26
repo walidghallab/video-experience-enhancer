@@ -22,21 +22,21 @@ describe("EditShortcuts", () => {
     {
       name: "saves changes context correctly",
       buttonToClick: "Save",
-      expectedSavedValue: "Ctrl + A/a",
-      expectedShownValue: "Ctrl + A/a",
+      expectedSavedValue: "Ctrl + A",
+      expectedShownValue: "Ctrl + A",
       expectFinishedEditingBeCalled: true,
     },
     {
       name: "cancel doesn't change context",
       buttonToClick: "Cancel",
-      expectedSavedValue: "Ctrl + E/e",
-      expectedShownValue: "Ctrl + A/a",
+      expectedSavedValue: "Ctrl + E",
+      expectedShownValue: "Ctrl + A",
       expectFinishedEditingBeCalled: true,
     },
     {
       name: "restore defaults correctly in the input values but not in the context",
       buttonToClick: "Restore defaults",
-      expectedSavedValue: "Ctrl + E/e",
+      expectedSavedValue: "Ctrl + E",
       expectedShownValue: "ArrowLeft",
       expectFinishedEditingBeCalled: false,
     },
@@ -52,7 +52,7 @@ describe("EditShortcuts", () => {
       // Arrange
       const finishedEditing = jest.fn();
       const mockValue = getMockValueForChromeContextProps();
-      mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
+      mockValue.keyboardShortcuts.backward = "Ctrl + E"; // Set initial value to be different from default
       render(
         <ChromeContextProvider mockValue={mockValue}>
           <EditShortcuts finishedEditing={finishedEditing} />
@@ -61,12 +61,12 @@ describe("EditShortcuts", () => {
       );
       await waitFor(() =>
         expect(screen.getByTestId("test-context").textContent).toBe(
-          "Ctrl + E/e"
+          "Ctrl + E"
         )
       );
       const input = await screen.findByLabelText(/Backward 5 seconds/);
       await waitFor(() =>
-        expect(input.getAttribute("value")).toBe("Ctrl + E/e")
+        expect(input.getAttribute("value")).toBe("Ctrl + E")
       );
 
       // Act
@@ -94,7 +94,7 @@ describe("EditShortcuts", () => {
   it("shows error when shortcuts are not unique", async () => {
     // Arrange
     const mockValue = getMockValueForChromeContextProps();
-    mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
+    mockValue.keyboardShortcuts.backward = "Ctrl + E"; // Set initial value to be different from default
     render(
       <ChromeContextProvider mockValue={mockValue}>
         <EditShortcuts finishedEditing={jest.fn()} />
@@ -103,7 +103,7 @@ describe("EditShortcuts", () => {
     await waitFor(() =>
       expect(
         screen.getByLabelText(/Backward 5 seconds/).getAttribute("value")
-      ).toBe("Ctrl + E/e")
+      ).toBe("Ctrl + E")
     );
 
     // Act
@@ -127,7 +127,7 @@ describe("EditShortcuts", () => {
     // Arrange
     jest.useFakeTimers();
     const mockValue = getMockValueForChromeContextProps();
-    mockValue.keyboardShortcuts.backward = "Ctrl + E/e"; // Set initial value to be different from default
+    mockValue.keyboardShortcuts.backward = "Ctrl + E"; // Set initial value to be different from default
     render(
       <ChromeContextProvider mockValue={mockValue}>
         <EditShortcuts finishedEditing={jest.fn()} />
@@ -136,7 +136,7 @@ describe("EditShortcuts", () => {
     await waitFor(() =>
       expect(
         screen.getByLabelText(/Backward 5 seconds/).getAttribute("value")
-      ).toBe("Ctrl + E/e")
+      ).toBe("Ctrl + E")
     );
 
     // Act

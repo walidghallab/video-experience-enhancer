@@ -39,8 +39,8 @@ describe("ChromeContextProvider", () => {
         playPause: "Alt + Space",
         backward: "Alt + ArrowLeft",
         forward: "Alt + ArrowRight",
-        fullscreen: "Alt + F/f",
-        subtitles: "Alt + C/c",
+        fullscreen: "Alt + F",
+        subtitles: "Alt + C/c", // Testing for backward compatibility (check normalizeShortcut function for details).
         increasePlaybackRate: "Alt + ArrowUp",
         decreasePlaybackRate: "Alt + ArrowDown",
       },
@@ -55,8 +55,8 @@ describe("ChromeContextProvider", () => {
     await screen.findByText(/"playPause":"Alt \+ Space"/);
     await screen.findByText(/"backward":"Alt \+ ArrowLeft"/);
     await screen.findByText(/"forward":"Alt \+ ArrowRight"/);
-    await screen.findByText(/"fullscreen":"Alt \+ F\/f"/);
-    await screen.findByText(/"subtitles":"Alt \+ C\/c"/);
+    await screen.findByText(/"fullscreen":"Alt \+ F"/);
+    await screen.findByText(/"subtitles":"Alt \+ C"/);
     await screen.findByText(/"increasePlaybackRate":"Alt \+ ArrowUp"/);
     await screen.findByText(/"decreasePlaybackRate":"Alt \+ ArrowDown"/);
   });
