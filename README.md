@@ -19,16 +19,16 @@ Once the extension is installed, you can use it by following these steps:
 
 **Default keyboard shortcuts (can be edited in the extension):**
 
-| Default keyboard shortcut | Functionality                       | Supported Websites                                                         |
-| ------------------------- | ----------------------------------- | -------------------------------------------------------------------------- |
-| Ctrl + Arrow Up           | Increase video playback rate by 0.5 | All http & https urls                                                      |
-| Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls                                                      |
-| Alt + Shift + D/d         | Download video                      | Most http & https urls (not including Youtube, Netflix, HBO & some others) |
-| C or c                    | Show/Hide English subtitles         | coursera.org                                                               |
-| F or f                    | Enter/Exit full-screen mode         | coursera.org                                                               |
-| Space                     | Play/Pause video                    | coursera.org                                                               |
-| Arrow Left                | Seek video backward 5 seconds       | coursera.org                                                               |
-| Arrow Right               | Seek video forward 5 seconds        | coursera.org                                                               |
+| Default keyboard shortcut | Functionality                       | Supported Websites    |
+| ------------------------- | ----------------------------------- | --------------------- |
+| Ctrl + Arrow Up           | Increase video playback rate by 0.5 | All http & https urls |
+| Ctrl + Arrow Down         | Decrease video playback rate by 0.5 | All http & https urls |
+| Alt + Shift + D           | Download video                      | coursera.org          |
+| C                         | Show/Hide English subtitles         | coursera.org          |
+| F                         | Enter/Exit full-screen mode         | coursera.org          |
+| Space                     | Play/Pause video                    | coursera.org          |
+| Arrow Left                | Seek video backward 5 seconds       | coursera.org          |
+| Arrow Right               | Seek video forward 5 seconds        | coursera.org          |
 
 **Extra functionality:**
 

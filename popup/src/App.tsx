@@ -121,10 +121,6 @@ function PartiallySupportedWebsite() {
             <TdForShortcutKey shortcutKey={shortcuts?.decreasePlaybackRate} />
             <td>Decrease playback rate by 0.5</td>
           </tr>
-          <tr>
-            <TdForShortcutKey shortcutKey={shortcuts?.downloadVideo} />
-            <td>Download video</td>
-          </tr>
         </tbody>
       </table>
     </div>

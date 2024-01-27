@@ -1,5 +1,5 @@
 import { keyboardEventToString } from "../popup/src/common/keyboard_shortcuts";
-import { LiveProxyStorage, downloadVideo, executeKeyboardEventListener, insertSnackbar, showSnackbar } from "./utils";
+import { LiveProxyStorage, executeKeyboardEventListener, insertSnackbar, showSnackbar } from "./utils";
 
 executeKeyboardEventListener(handleKeyDown);
 
@@ -32,10 +32,6 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
           video.playbackRate -= 0.5;
         }
         showSnackbar(`Set playback rate to ${video.playbackRate}x`);
-        e.preventDefault();
-        break;
-      case keyboardShortcuts.downloadVideo:
-        downloadVideo(video.src, document.title);
         e.preventDefault();
         break;
     }

@@ -1,5 +1,5 @@
 import { keyboardEventToString } from "../popup/src/common/keyboard_shortcuts";
-import { LiveProxyStorage, executeKeyboardEventListener } from "./utils";
+import { LiveProxyStorage, downloadVideo, executeKeyboardEventListener } from "./utils";
 
 // The handler here stops propagation and prevents default for all keydown events, that's why we delay adding its eventListener to allow other scripts to run first.
 setTimeout(() => {
@@ -70,6 +70,10 @@ function handleKeyDown(e: KeyboardEvent, liveProxyStorage: LiveProxyStorage) {
         } else {
           console.error("Could not find fullscreen button");
         }
+        e.preventDefault();
+        break;
+      case keyboardShortcuts.downloadVideo:
+        downloadVideo(video.src, document.title);
         e.preventDefault();
         break;
     }
