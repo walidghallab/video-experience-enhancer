@@ -47,4 +47,4 @@ yarn-error.log*
 **/*.mkf
 
 # Misc
-hack/video-experience-enhancer.zip
+scripts/video-experience-enhancer.zip

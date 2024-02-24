@@ -19,7 +19,7 @@ cd "$PARENT_PATH"
 
 ZIPPED_FILE_NAME="video-experience-enhancer.zip"
 
-cd .. && make && rm -f $ZIPPED_FILE_NAME && zip -r $ZIPPED_FILE_NAME src && mv $ZIPPED_FILE_NAME hack
+cd .. && make && rm -f $ZIPPED_FILE_NAME && zip -r $ZIPPED_FILE_NAME src && mv $ZIPPED_FILE_NAME scripts
 
 if [[ $? != "0" ]]; then
     print_error "Failed to zip the extension"
